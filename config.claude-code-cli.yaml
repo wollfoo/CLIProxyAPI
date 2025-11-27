@@ -1,0 +1,17 @@
+port: 8317
+
+# Thư mục chứa các file credential đã login
+auth-dir: "~/.cli-proxy-api"
+
+# Key để client (Claude Code) kết nối vào Proxy (giống mật khẩu cửa vào)
+api-keys:
+  - "sk-dummy" 
+
+# Tăng retry để ổn định hơn khi credential bị rate limit
+request-retry: 5
+max-retry-interval: 10
+
+# Tự động switch credential khác khi hết quota
+quota-exceeded:
+  switch-project: true
+  switch-preview-model: true

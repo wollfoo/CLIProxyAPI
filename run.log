@@ -1,36 +1,408 @@
-[2025-11-27 17:00:51] [debug] [credentials.go:25] -------------------------------------------------------------------
-[2025-11-27 17:02:59] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 17:02:59 | 200 |          86ms |       127.0.0.1 | POST    "/api/internal?getUserInfo"
-[2025-11-27 17:06:29] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 17:06:29 | 200 |          56ms |       127.0.0.1 | POST    "/api/internal?getUserInfo"
-[2025-11-27 17:06:29] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 17:06:29 | 200 |          58ms |       127.0.0.1 | POST    "/api/internal?getUserFreeTierStatus"
-[2025-11-27 17:06:30] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 17:06:30 | 200 |          55ms |       127.0.0.1 | POST    "/api/internal?getCurrentAd"
-[2025-11-27 17:06:30] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 17:06:30 | 200 |          55ms |       127.0.0.1 | POST    "/api/internal?getUserInfo"
-[2025-11-27 17:06:30] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 17:06:30 | 200 |          56ms |       127.0.0.1 | POST    "/api/internal?getUserInfo"
-[2025-11-27 17:06:30] [warning] [gin_logger.go:56] [GIN] 2025/11/27 - 17:06:30 | 404 |            0s |       127.0.0.1 | GET     "/threads.rss"
-[2025-11-27 17:06:30] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 17:06:30 | 200 |          88ms |       127.0.0.1 | POST    "/api/telemetry"
-[2025-11-27 17:06:59] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 17:06:59 | 200 |          40ms |       127.0.0.1 | POST    "/api/internal?getUserInfo"
-[2025-11-27 17:06:59] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 17:06:59 | 200 |          40ms |       127.0.0.1 | POST    "/api/internal?getUserFreeTierStatus"
-[2025-11-27 17:06:59] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 17:06:59 | 200 |          38ms |       127.0.0.1 | POST    "/api/internal?getCurrentAd"
-[2025-11-27 17:06:59] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 17:06:59 | 200 |          40ms |       127.0.0.1 | POST    "/api/internal?getUserInfo"
-[2025-11-27 17:06:59] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 17:06:59 | 200 |          55ms |       127.0.0.1 | POST    "/api/internal?getUserInfo"
-[2025-11-27 17:06:59] [warning] [gin_logger.go:56] [GIN] 2025/11/27 - 17:06:59 | 404 |            0s |       127.0.0.1 | GET     "/threads.rss"
-[2025-11-27 17:06:59] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 17:06:59 | 200 |         108ms |       127.0.0.1 | POST    "/api/telemetry"
-[2025-11-27 17:07:14] [debug] [manager.go:379] Use API key FRDX...SxgN for model claude-haiku-4-5-20251001
-[2025-11-27 17:07:15] [debug] [manager.go:475] Use API key FRDX...SxgN for model claude-opus-4-5-20251101
-[2025-11-27 17:07:16] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 17:07:16 | 200 |        1.918s |       127.0.0.1 | POST    "/api/provider/anthropic/v1/messages"
-[2025-11-27 17:07:16] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 17:07:16 | 200 |          48ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
-[2025-11-27 17:07:17] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 17:07:17 | 200 |          67ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
-[2025-11-27 17:07:17] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 17:07:17 | 200 |          39ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
-[2025-11-27 17:07:17] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 17:07:17 | 200 |          42ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
-[2025-11-27 17:07:17] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 17:07:17 | 200 |          75ms |       127.0.0.1 | POST    "/api/internal?uploadThread"
-[2025-11-27 17:07:20] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 17:07:20 | 200 |        4.921s |       127.0.0.1 | POST    "/api/provider/anthropic/v1/messages"
-[2025-11-27 17:07:20] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 17:07:20 | 200 |          37ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
-[2025-11-27 17:07:20] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 17:07:20 | 200 |          41ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
-[2025-11-27 17:07:20] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 17:07:20 | 200 |          54ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
-[2025-11-27 17:07:21] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 17:07:21 | 200 |          37ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
-[2025-11-27 17:07:21] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 17:07:21 | 200 |          40ms |       127.0.0.1 | POST    "/api/internal?extractWebPageContent"
-[2025-11-27 17:07:21] [debug] [manager.go:475] Use API key FRDX...SxgN for model claude-opus-4-5-20251101
-[2025-11-27 17:07:23] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 17:07:23 | 200 |          69ms |       127.0.0.1 | POST    "/api/internal?uploadThread"
-[2025-11-27 17:07:24] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 17:07:24 | 200 |        3.772s |       127.0.0.1 | POST    "/api/provider/anthropic/v1/messages"
-
-
-
+azureuser@97dd9930b6894b1bbee820b562143023000000:~/CLIProxyAPI$ ./cli-proxy-api --config config.yaml
+CLIProxyAPI Version: dev, Commit: none, BuiltAt: unknown
+[2025-11-27 18:54:25] [info] [main.go:397] CLIProxyAPI Version: dev, Commit: none, BuiltAt: unknown
+[2025-11-27 18:54:25] [info] [util.go:30] log level changed from info to debug (debug=true)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:   export GIN_MODE=release
+ - using code:  gin.SetMode(gin.ReleaseMode)
+[2025-11-27 18:54:25] [debug] [reconcile.go:159] auth providers unchanged after config update
+[2025-11-27 18:54:25] [info] [global_logger.go:61] GET    /management.html          --> github.com/router-for-me/CLIProxyAPI/v6/internal/api.(*Server).serveManagementControlPanel-fm (5 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] GET    /v1/models                --> github.com/router-for-me/CLIProxyAPI/v6/internal/api.(*Server).setupRoutes.(*Server).unifiedModelsHandler.func8 (6 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] POST   /v1/chat/completions      --> github.com/router-for-me/CLIProxyAPI/v6/sdk/api/handlers/openai.(*OpenAIAPIHandler).ChatCompletions-fm (6 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] POST   /v1/completions           --> github.com/router-for-me/CLIProxyAPI/v6/sdk/api/handlers/openai.(*OpenAIAPIHandler).Completions-fm (6 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] POST   /v1/messages              --> github.com/router-for-me/CLIProxyAPI/v6/sdk/api/handlers/claude.(*ClaudeCodeAPIHandler).ClaudeMessages-fm (6 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] POST   /v1/messages/count_tokens --> github.com/router-for-me/CLIProxyAPI/v6/sdk/api/handlers/claude.(*ClaudeCodeAPIHandler).ClaudeCountTokens-fm (6 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] POST   /v1/responses             --> github.com/router-for-me/CLIProxyAPI/v6/sdk/api/handlers/openai.(*OpenAIResponsesAPIHandler).Responses-fm (6 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] GET    /v1beta/models            --> github.com/router-for-me/CLIProxyAPI/v6/sdk/api/handlers/gemini.(*GeminiAPIHandler).GeminiModels-fm (6 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] POST   /v1beta/models/:action    --> github.com/router-for-me/CLIProxyAPI/v6/sdk/api/handlers/gemini.(*GeminiAPIHandler).GeminiHandler-fm (6 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] GET    /v1beta/models/:action    --> github.com/router-for-me/CLIProxyAPI/v6/sdk/api/handlers/gemini.(*GeminiAPIHandler).GeminiGetHandler-fm (6 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] GET    /                         --> github.com/router-for-me/CLIProxyAPI/v6/internal/api.(*Server).setupRoutes.func1 (5 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] POST   /v1internal:method        --> github.com/router-for-me/CLIProxyAPI/v6/sdk/api/handlers/gemini.(*GeminiCLIAPIHandler).CLIHandler-fm (5 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] GET    /anthropic/callback       --> github.com/router-for-me/CLIProxyAPI/v6/internal/api.(*Server).setupRoutes.func2 (5 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] GET    /codex/callback           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api.(*Server).setupRoutes.func3 (5 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] GET    /google/callback          --> github.com/router-for-me/CLIProxyAPI/v6/internal/api.(*Server).setupRoutes.func4 (5 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] GET    /iflow/callback           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api.(*Server).setupRoutes.func5 (5 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] GET    /antigravity/callback     --> github.com/router-for-me/CLIProxyAPI/v6/internal/api.(*Server).setupRoutes.func6 (5 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] GET    /api/provider/:provider/models --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).registerProviderAliases.func3 (6 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] POST   /api/provider/:provider/chat/completions --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).registerProviderAliases.(*FallbackHandler).WrapHandler.func4 (6 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] POST   /api/provider/:provider/completions --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).registerProviderAliases.(*FallbackHandler).WrapHandler.func5 (6 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] POST   /api/provider/:provider/responses --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).registerProviderAliases.(*FallbackHandler).WrapHandler.func6 (6 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] GET    /api/provider/:provider/v1/models --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).registerProviderAliases.func3 (6 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] POST   /api/provider/:provider/v1/chat/completions --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).registerProviderAliases.(*FallbackHandler).WrapHandler.func7 (6 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] POST   /api/provider/:provider/v1/completions --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).registerProviderAliases.(*FallbackHandler).WrapHandler.func8 (6 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] POST   /api/provider/:provider/v1/responses --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).registerProviderAliases.(*FallbackHandler).WrapHandler.func9 (6 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] POST   /api/provider/:provider/v1/messages --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).registerProviderAliases.(*FallbackHandler).WrapHandler.func10 (6 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] POST   /api/provider/:provider/v1/messages/count_tokens --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).registerProviderAliases.(*FallbackHandler).WrapHandler.func11 (6 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] GET    /api/provider/:provider/v1beta/models --> github.com/router-for-me/CLIProxyAPI/v6/sdk/api/handlers/gemini.(*GeminiAPIHandler).GeminiModels-fm (6 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] POST   /api/provider/:provider/v1beta/models/:action --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).registerProviderAliases.(*FallbackHandler).WrapHandler.func12 (6 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] GET    /api/provider/:provider/v1beta/models/:action --> github.com/router-for-me/CLIProxyAPI/v6/sdk/api/handlers/gemini.(*GeminiAPIHandler).GeminiGetHandler-fm (6 handlers)
+[2025-11-27 18:54:25] [info] [routes.go:93] Amp management routes restricted to localhost only (CORS disabled)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] GET    /api/internal             --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] POST   /api/internal             --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] PUT    /api/internal             --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] PATCH  /api/internal             --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] HEAD   /api/internal             --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] OPTIONS /api/internal             --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] DELETE /api/internal             --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] CONNECT /api/internal             --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] TRACE  /api/internal             --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] GET    /api/internal/*path       --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] POST   /api/internal/*path       --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] PUT    /api/internal/*path       --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] PATCH  /api/internal/*path       --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] HEAD   /api/internal/*path       --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] OPTIONS /api/internal/*path       --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] DELETE /api/internal/*path       --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] CONNECT /api/internal/*path       --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] TRACE  /api/internal/*path       --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] GET    /api/user                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] POST   /api/user                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] PUT    /api/user                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] PATCH  /api/user                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] HEAD   /api/user                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] OPTIONS /api/user                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] DELETE /api/user                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] CONNECT /api/user                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] TRACE  /api/user                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] GET    /api/user/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] POST   /api/user/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] PUT    /api/user/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] PATCH  /api/user/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] HEAD   /api/user/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] OPTIONS /api/user/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] DELETE /api/user/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] CONNECT /api/user/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] TRACE  /api/user/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] GET    /api/auth                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] POST   /api/auth                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] PUT    /api/auth                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] PATCH  /api/auth                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] HEAD   /api/auth                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] OPTIONS /api/auth                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] DELETE /api/auth                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] CONNECT /api/auth                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] TRACE  /api/auth                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] GET    /api/auth/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] POST   /api/auth/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] PUT    /api/auth/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] PATCH  /api/auth/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] HEAD   /api/auth/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] OPTIONS /api/auth/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] DELETE /api/auth/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] CONNECT /api/auth/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] TRACE  /api/auth/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] GET    /api/meta                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] POST   /api/meta                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] PUT    /api/meta                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] PATCH  /api/meta                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] HEAD   /api/meta                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] OPTIONS /api/meta                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] DELETE /api/meta                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] CONNECT /api/meta                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] TRACE  /api/meta                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] GET    /api/meta/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] POST   /api/meta/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] PUT    /api/meta/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] PATCH  /api/meta/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] HEAD   /api/meta/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] OPTIONS /api/meta/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] DELETE /api/meta/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] CONNECT /api/meta/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] TRACE  /api/meta/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] GET    /api/ads                  --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] POST   /api/ads                  --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] PUT    /api/ads                  --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] PATCH  /api/ads                  --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] HEAD   /api/ads                  --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] OPTIONS /api/ads                  --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] DELETE /api/ads                  --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] CONNECT /api/ads                  --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] TRACE  /api/ads                  --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] GET    /api/telemetry            --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] POST   /api/telemetry            --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] PUT    /api/telemetry            --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] PATCH  /api/telemetry            --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] HEAD   /api/telemetry            --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] OPTIONS /api/telemetry            --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] DELETE /api/telemetry            --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] CONNECT /api/telemetry            --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] TRACE  /api/telemetry            --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] GET    /api/telemetry/*path      --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] POST   /api/telemetry/*path      --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] PUT    /api/telemetry/*path      --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] PATCH  /api/telemetry/*path      --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] HEAD   /api/telemetry/*path      --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] OPTIONS /api/telemetry/*path      --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] DELETE /api/telemetry/*path      --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] CONNECT /api/telemetry/*path      --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] TRACE  /api/telemetry/*path      --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] GET    /api/threads              --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] POST   /api/threads              --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] PUT    /api/threads              --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] PATCH  /api/threads              --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] HEAD   /api/threads              --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] OPTIONS /api/threads              --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] DELETE /api/threads              --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] CONNECT /api/threads              --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] TRACE  /api/threads              --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] GET    /api/threads/*path        --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] POST   /api/threads/*path        --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] PUT    /api/threads/*path        --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] PATCH  /api/threads/*path        --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] HEAD   /api/threads/*path        --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] OPTIONS /api/threads/*path        --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] DELETE /api/threads/*path        --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] CONNECT /api/threads/*path        --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] TRACE  /api/threads/*path        --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] GET    /api/otel                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] POST   /api/otel                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] PUT    /api/otel                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] PATCH  /api/otel                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] HEAD   /api/otel                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] OPTIONS /api/otel                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] DELETE /api/otel                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] CONNECT /api/otel                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] TRACE  /api/otel                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] GET    /api/otel/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] POST   /api/otel/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] PUT    /api/otel/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] PATCH  /api/otel/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] HEAD   /api/otel/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] OPTIONS /api/otel/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] DELETE /api/otel/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] CONNECT /api/otel/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] TRACE  /api/otel/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] GET    /api/provider/google/v1beta1/*path --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func2 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] POST   /api/provider/google/v1beta1/*path --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func2 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] PUT    /api/provider/google/v1beta1/*path --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func2 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] PATCH  /api/provider/google/v1beta1/*path --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func2 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] HEAD   /api/provider/google/v1beta1/*path --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func2 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] OPTIONS /api/provider/google/v1beta1/*path --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func2 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] DELETE /api/provider/google/v1beta1/*path --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func2 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] CONNECT /api/provider/google/v1beta1/*path --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func2 (7 handlers)
+[2025-11-27 18:54:25] [info] [global_logger.go:61] TRACE  /api/provider/google/v1beta1/*path --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func2 (7 handlers)
+[2025-11-27 18:54:25] [info] [amp.go:143] Amp upstream proxy enabled for: https://ampcode.com
+[2025-11-27 18:54:25] [debug] [amp.go:144] Amp provider alias routes registered
+[2025-11-27 18:54:25] [info] [global_logger.go:61] GET    /v1/ws                    --> github.com/router-for-me/CLIProxyAPI/v6/internal/api.(*Server).AttachWebsocketRoute.func2 (6 handlers)
+[2025-11-27 18:54:25] [debug] [server.go:721] Starting API server on :8317
+[2025-11-27 18:54:25] [debug] [updater.go:235] management asset is already up to date
+API server started successfully
+[2025-11-27 18:54:25] [debug] [watcher.go:159] watching config file: config.yaml
+[2025-11-27 18:54:25] [debug] [watcher.go:166] watching auth directory: /home/azureuser/.cli-proxy-api
+[2025-11-27 18:54:25] [debug] [watcher.go:668] starting full client load process
+[2025-11-27 18:54:25] [debug] [watcher.go:685] loaded 1 API key clients
+[2025-11-27 18:54:25] [debug] [watcher.go:1214] processing auth file 1: codex-nvt191655320@gmail.com.json
+[2025-11-27 18:54:25] [debug] [watcher.go:1214] processing auth file 2: gemini-nvt191655320@gmail.com-all.json
+[2025-11-27 18:54:25] [debug] [watcher.go:1226] auth directory scan complete - found 2 .json files, 2 readable
+[2025-11-27 18:54:25] [debug] [watcher.go:691] loaded 2 file-based clients
+[2025-11-27 18:54:25] [debug] [watcher.go:731] triggering server update callback before auth refresh
+[2025-11-27 18:54:25] [debug] [reconcile.go:159] auth providers unchanged after config update
+server clients and configuration updated: 3 clients (2 auth files + 0 Gemini API keys + 1 Claude API keys + 0 Codex keys + 0 OpenAI-compat)
+[2025-11-27 18:54:25] [debug] [updater.go:206] management asset update check skipped: last check was 0s ago (interval: 3h0m0s)
+[2025-11-27 18:54:25] [info] [watcher.go:737] full client load complete - 3 clients (2 auth files + 0 Gemini API keys + 1 Claude API keys + 0 Codex keys + 0 OpenAI-compat)
+[2025-11-27 18:54:25] [info] [service.go:515] file watcher started for config and auth directory changes
+[2025-11-27 18:54:25] [info] [service.go:521] core auth auto-refresh started (interval=15m0s)
+[2025-11-27 18:54:25] [debug] [model_registry.go:334] Registered new model claude-haiku-4-5-20251001 from provider claude
+[2025-11-27 18:54:25] [debug] [model_registry.go:334] Registered new model claude-haiku-4-5 from provider claude
+[2025-11-27 18:54:25] [debug] [model_registry.go:334] Registered new model claude-sonnet-4-5-20250929 from provider claude
+[2025-11-27 18:54:25] [debug] [model_registry.go:334] Registered new model claude-sonnet-4-5 from provider claude
+[2025-11-27 18:54:25] [debug] [model_registry.go:334] Registered new model claude-opus-4-5-20251101 from provider claude
+[2025-11-27 18:54:25] [debug] [model_registry.go:334] Registered new model claude-opus-4-5 from provider claude
+[2025-11-27 18:54:25] [debug] [model_registry.go:334] Registered new model claude-opus-4-1 from provider claude
+[2025-11-27 18:54:25] [debug] [model_registry.go:166] Registered client claude:apikey:6d5852438f2f from provider claude with 7 models
+[2025-11-27 18:54:25] [debug] [credentials.go:25] -------------------------------------------------------------------
+[2025-11-27 18:54:25] [debug] [model_registry.go:334] Registered new model gemini-2.5-pro from provider gemini-cli
+[2025-11-27 18:54:25] [debug] [model_registry.go:334] Registered new model gemini-2.5-flash from provider gemini-cli
+[2025-11-27 18:54:25] [debug] [model_registry.go:334] Registered new model gemini-2.5-flash-lite from provider gemini-cli
+[2025-11-27 18:54:25] [debug] [model_registry.go:334] Registered new model gemini-3-pro-preview from provider gemini-cli
+[2025-11-27 18:54:25] [debug] [model_registry.go:166] Registered client gemini-nvt191655320@gmail.com-all.json::gen-lang-client-0494380206 from provider gemini-cli with 4 models
+[2025-11-27 18:54:25] [debug] [credentials.go:25] -------------------------------------------------------------------
+[2025-11-27 18:54:25] [debug] [model_registry.go:319] Incremented count for model gemini-2.5-pro, now 2 clients
+[2025-11-27 18:54:25] [debug] [model_registry.go:319] Incremented count for model gemini-2.5-flash, now 2 clients
+[2025-11-27 18:54:25] [debug] [model_registry.go:319] Incremented count for model gemini-2.5-flash-lite, now 2 clients
+[2025-11-27 18:54:25] [debug] [model_registry.go:319] Incremented count for model gemini-3-pro-preview, now 2 clients
+[2025-11-27 18:54:25] [debug] [model_registry.go:166] Registered client gemini-nvt191655320@gmail.com-all.json::swift-setup-464015-c2 from provider gemini-cli with 4 models
+[2025-11-27 18:54:25] [debug] [credentials.go:25] -------------------------------------------------------------------
+[2025-11-27 18:54:25] [debug] [model_registry.go:319] Incremented count for model gemini-2.5-pro, now 3 clients
+[2025-11-27 18:54:25] [debug] [model_registry.go:319] Incremented count for model gemini-2.5-flash, now 3 clients
+[2025-11-27 18:54:25] [debug] [model_registry.go:319] Incremented count for model gemini-2.5-flash-lite, now 3 clients
+[2025-11-27 18:54:25] [debug] [model_registry.go:319] Incremented count for model gemini-3-pro-preview, now 3 clients
+[2025-11-27 18:54:25] [debug] [model_registry.go:166] Registered client gemini-nvt191655320@gmail.com-all.json::fir-firebase-ai-app-340cb from provider gemini-cli with 4 models
+[2025-11-27 18:54:25] [debug] [credentials.go:25] -------------------------------------------------------------------
+[2025-11-27 18:54:25] [debug] [model_registry.go:319] Incremented count for model gemini-2.5-pro, now 4 clients
+[2025-11-27 18:54:25] [debug] [model_registry.go:319] Incremented count for model gemini-2.5-flash, now 4 clients
+[2025-11-27 18:54:25] [debug] [model_registry.go:319] Incremented count for model gemini-2.5-flash-lite, now 4 clients
+[2025-11-27 18:54:25] [debug] [model_registry.go:319] Incremented count for model gemini-3-pro-preview, now 4 clients
+[2025-11-27 18:54:25] [debug] [model_registry.go:166] Registered client gemini-nvt191655320@gmail.com-all.json::solar-dialect-271304 from provider gemini-cli with 4 models
+[2025-11-27 18:54:25] [debug] [credentials.go:25] -------------------------------------------------------------------
+[2025-11-27 18:54:25] [debug] [model_registry.go:334] Registered new model gpt-5 from provider codex
+[2025-11-27 18:54:25] [debug] [model_registry.go:334] Registered new model gpt-5-minimal from provider codex
+[2025-11-27 18:54:25] [debug] [model_registry.go:334] Registered new model gpt-5-low from provider codex
+[2025-11-27 18:54:25] [debug] [model_registry.go:334] Registered new model gpt-5-medium from provider codex
+[2025-11-27 18:54:25] [debug] [model_registry.go:334] Registered new model gpt-5-high from provider codex
+[2025-11-27 18:54:25] [debug] [model_registry.go:334] Registered new model gpt-5-codex from provider codex
+[2025-11-27 18:54:25] [debug] [model_registry.go:334] Registered new model gpt-5-codex-low from provider codex
+[2025-11-27 18:54:25] [debug] [model_registry.go:334] Registered new model gpt-5-codex-medium from provider codex
+[2025-11-27 18:54:25] [debug] [model_registry.go:334] Registered new model gpt-5-codex-high from provider codex
+[2025-11-27 18:54:25] [debug] [model_registry.go:334] Registered new model gpt-5-codex-mini from provider codex
+[2025-11-27 18:54:25] [debug] [model_registry.go:334] Registered new model gpt-5-codex-mini-medium from provider codex
+[2025-11-27 18:54:25] [debug] [model_registry.go:334] Registered new model gpt-5-codex-mini-high from provider codex
+[2025-11-27 18:54:25] [debug] [model_registry.go:334] Registered new model gpt-5.1 from provider codex
+[2025-11-27 18:54:25] [debug] [model_registry.go:334] Registered new model gpt-5.1-none from provider codex
+[2025-11-27 18:54:25] [debug] [model_registry.go:334] Registered new model gpt-5.1-low from provider codex
+[2025-11-27 18:54:25] [debug] [model_registry.go:334] Registered new model gpt-5.1-medium from provider codex
+[2025-11-27 18:54:25] [debug] [model_registry.go:334] Registered new model gpt-5.1-high from provider codex
+[2025-11-27 18:54:25] [debug] [model_registry.go:334] Registered new model gpt-5.1-codex from provider codex
+[2025-11-27 18:54:25] [debug] [model_registry.go:334] Registered new model gpt-5.1-codex-low from provider codex
+[2025-11-27 18:54:25] [debug] [model_registry.go:334] Registered new model gpt-5.1-codex-medium from provider codex
+[2025-11-27 18:54:25] [debug] [model_registry.go:334] Registered new model gpt-5.1-codex-high from provider codex
+[2025-11-27 18:54:25] [debug] [model_registry.go:334] Registered new model gpt-5.1-codex-mini from provider codex
+[2025-11-27 18:54:25] [debug] [model_registry.go:334] Registered new model gpt-5.1-codex-mini-medium from provider codex
+[2025-11-27 18:54:25] [debug] [model_registry.go:334] Registered new model gpt-5.1-codex-mini-high from provider codex
+[2025-11-27 18:54:25] [debug] [model_registry.go:334] Registered new model gpt-5.1-codex-max from provider codex
+[2025-11-27 18:54:25] [debug] [model_registry.go:334] Registered new model gpt-5.1-codex-max-low from provider codex
+[2025-11-27 18:54:25] [debug] [model_registry.go:334] Registered new model gpt-5.1-codex-max-medium from provider codex
+[2025-11-27 18:54:25] [debug] [model_registry.go:334] Registered new model gpt-5.1-codex-max-high from provider codex
+[2025-11-27 18:54:25] [debug] [model_registry.go:334] Registered new model gpt-5.1-codex-max-xhigh from provider codex
+[2025-11-27 18:54:25] [debug] [model_registry.go:166] Registered client codex-nvt191655320@gmail.com.json from provider codex with 29 models
+[2025-11-27 18:54:25] [debug] [credentials.go:25] -------------------------------------------------------------------
+[2025-11-27 18:54:25] [debug] [model_registry.go:319] Incremented count for model gemini-2.5-pro, now 5 clients
+[2025-11-27 18:54:25] [debug] [model_registry.go:319] Incremented count for model gemini-2.5-flash, now 5 clients
+[2025-11-27 18:54:25] [debug] [model_registry.go:319] Incremented count for model gemini-2.5-flash-lite, now 5 clients
+[2025-11-27 18:54:25] [debug] [model_registry.go:319] Incremented count for model gemini-3-pro-preview, now 5 clients
+[2025-11-27 18:54:25] [debug] [model_registry.go:166] Registered client gemini-nvt191655320@gmail.com-all.json::sample-firebase-ai-app-57f5f from provider gemini-cli with 4 models
+[2025-11-27 18:54:25] [debug] [credentials.go:25] -------------------------------------------------------------------
+[2025-11-27 18:54:25] [debug] [model_registry.go:319] Incremented count for model gemini-2.5-pro, now 6 clients
+[2025-11-27 18:54:25] [debug] [model_registry.go:319] Incremented count for model gemini-2.5-flash, now 6 clients
+[2025-11-27 18:54:25] [debug] [model_registry.go:319] Incremented count for model gemini-2.5-flash-lite, now 6 clients
+[2025-11-27 18:54:25] [debug] [model_registry.go:319] Incremented count for model gemini-3-pro-preview, now 6 clients
+[2025-11-27 18:54:25] [debug] [model_registry.go:166] Registered client gemini-nvt191655320@gmail.com-all.json::gen-lang-client-0943836959 from provider gemini-cli with 4 models
+[2025-11-27 18:54:25] [debug] [credentials.go:25] -------------------------------------------------------------------
+[2025-11-27 18:54:25] [debug] [model_registry.go:319] Incremented count for model gemini-2.5-pro, now 7 clients
+[2025-11-27 18:54:25] [debug] [model_registry.go:319] Incremented count for model gemini-2.5-flash, now 7 clients
+[2025-11-27 18:54:25] [debug] [model_registry.go:319] Incremented count for model gemini-2.5-flash-lite, now 7 clients
+[2025-11-27 18:54:25] [debug] [model_registry.go:319] Incremented count for model gemini-3-pro-preview, now 7 clients
+[2025-11-27 18:54:25] [debug] [model_registry.go:166] Registered client gemini-nvt191655320@gmail.com-all.json::my-aws-name from provider gemini-cli with 4 models
+[2025-11-27 18:54:25] [debug] [credentials.go:25] -------------------------------------------------------------------
+[2025-11-27 18:54:45] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:54:45 | 200 |         151ms |       127.0.0.1 | POST    "/api/internal?getUserFreeTierStatus"
+[2025-11-27 18:54:45] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:54:45 | 200 |         154ms |       127.0.0.1 | POST    "/api/internal?getUserInfo"
+[2025-11-27 18:54:45] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:54:45 | 200 |          48ms |       127.0.0.1 | POST    "/api/internal?getUserInfo"
+[2025-11-27 18:54:45] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:54:45 | 200 |          48ms |       127.0.0.1 | POST    "/api/internal?getCurrentAd"
+[2025-11-27 18:54:45] [warning] [gin_logger.go:56] [GIN] 2025/11/27 - 18:54:45 | 404 |            0s |       127.0.0.1 | GET     "/threads.rss"
+[2025-11-27 18:54:45] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:54:45 | 200 |          46ms |       127.0.0.1 | POST    "/api/internal?getUserInfo"
+[2025-11-27 18:54:45] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:54:45 | 200 |          92ms |       127.0.0.1 | POST    "/api/telemetry"
+[2025-11-27 18:54:51] [debug] [manager.go:379] Use API key FRDX...SxgN for model claude-haiku-4-5-20251001
+[2025-11-27 18:54:51] [debug] [manager.go:475] Use API key FRDX...SxgN for model claude-opus-4-5-20251101
+[2025-11-27 18:54:53] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:54:53 | 200 |        1.498s |       127.0.0.1 | POST    "/api/provider/anthropic/v1/messages"
+[2025-11-27 18:54:53] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:54:53 | 200 |          48ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 18:54:53] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:54:53 | 200 |          44ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 18:54:53] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:54:53 | 200 |          48ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 18:54:54] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:54:54 | 200 |          60ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 18:54:54] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:54:54 | 200 |          63ms |       127.0.0.1 | POST    "/api/internal?uploadThread"
+[2025-11-27 18:54:56] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:54:56 | 200 |        4.686s |       127.0.0.1 | POST    "/api/provider/anthropic/v1/messages"
+[2025-11-27 18:54:56] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:54:56 | 200 |          46ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 18:54:56] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:54:56 | 200 |          55ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 18:54:56] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:54:56 | 200 |          47ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 18:54:57] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:54:57 | 200 |          46ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 18:54:57] [debug] [manager.go:475] Use API key FRDX...SxgN for model claude-opus-4-5-20251101
+[2025-11-27 18:54:59] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:54:59 | 200 |          61ms |       127.0.0.1 | POST    "/api/internal?uploadThread"
+[2025-11-27 18:55:06] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:55:06 | 200 |          60ms |       127.0.0.1 | POST    "/api/internal?uploadThread"
+[2025-11-27 18:55:10] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:55:10 | 200 |          64ms |       127.0.0.1 | POST    "/api/internal?uploadThread"
+[2025-11-27 18:55:11] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:55:11 | 200 |       13.732s |       127.0.0.1 | POST    "/api/provider/anthropic/v1/messages"
+[2025-11-27 18:55:11] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:55:11 | 200 |          46ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 18:55:11] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:55:11 | 200 |          46ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 18:55:11] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:55:11 | 200 |          44ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 18:55:12] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:55:12 | 200 |          47ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 18:55:12] [debug] [manager.go:475] Use API key FRDX...SxgN for model claude-opus-4-5-20251101
+[2025-11-27 18:55:14] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:55:14 | 200 |          63ms |       127.0.0.1 | POST    "/api/internal?uploadThread"
+[2025-11-27 18:55:19] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:55:19 | 200 |        7.546s |       127.0.0.1 | POST    "/api/provider/anthropic/v1/messages"
+[2025-11-27 18:55:19] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:55:19 | 200 |          45ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 18:55:19] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:55:19 | 200 |          45ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 18:55:20] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:55:20 | 200 |          47ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 18:55:20] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:55:20 | 200 |          48ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 18:55:20] [debug] [manager.go:475] Use API key FRDX...SxgN for model claude-opus-4-5-20251101
+[2025-11-27 18:55:22] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:55:22 | 200 |          65ms |       127.0.0.1 | POST    "/api/internal?uploadThread"
+[2025-11-27 18:55:26] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:55:26 | 200 |        5.939s |       127.0.0.1 | POST    "/api/provider/anthropic/v1/messages"
+[2025-11-27 18:55:26] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:55:26 | 200 |          46ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 18:55:27] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:55:27 | 200 |          44ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 18:55:27] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:55:27 | 200 |          46ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 18:55:27] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:55:27 | 200 |          46ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 18:55:27] [debug] [manager.go:475] Use API key FRDX...SxgN for model claude-opus-4-5-20251101
+[2025-11-27 18:55:29] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:55:29 | 200 |          64ms |       127.0.0.1 | POST    "/api/internal?uploadThread"
+[2025-11-27 18:55:34] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:55:34 | 200 |        6.637s |       127.0.0.1 | POST    "/api/provider/anthropic/v1/messages"
+[2025-11-27 18:55:34] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:55:34 | 200 |          45ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 18:55:34] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:55:34 | 200 |          48ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 18:55:35] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:55:35 | 200 |          47ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 18:55:35] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:55:35 | 200 |          45ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 18:55:35] [debug] [manager.go:475] Use API key FRDX...SxgN for model claude-opus-4-5-20251101
+[2025-11-27 18:55:37] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:55:37 | 200 |          71ms |       127.0.0.1 | POST    "/api/internal?uploadThread"
+[2025-11-27 18:55:44] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:55:44 | 200 |        8.386s |       127.0.0.1 | POST    "/api/provider/anthropic/v1/messages"
+[2025-11-27 18:55:44] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:55:44 | 200 |          47ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 18:55:44] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:55:44 | 200 |          48ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 18:55:44] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:55:44 | 200 |          47ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 18:55:44] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:55:44 | 200 |          64ms |       127.0.0.1 | POST    "/api/internal?uploadThread"
+[2025-11-27 18:55:45] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:55:45 | 200 |          47ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 18:55:45] [debug] [manager.go:475] Use API key FRDX...SxgN for model claude-opus-4-5-20251101
+[2025-11-27 18:55:48] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:55:48 | 200 |          70ms |       127.0.0.1 | POST    "/api/internal?uploadThread"
+[2025-11-27 18:55:51] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:55:51 | 200 |        6.541s |       127.0.0.1 | POST    "/api/provider/anthropic/v1/messages"
+[2025-11-27 18:55:51] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:55:51 | 200 |          48ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 18:55:51] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:55:51 | 200 |          48ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 18:55:52] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:55:52 | 200 |          49ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 18:55:52] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:55:52 | 200 |          47ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 18:55:53] [debug] [manager.go:475] Use API key FRDX...SxgN for model claude-opus-4-5-20251101
+[2025-11-27 18:55:54] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:55:54 | 200 |          70ms |       127.0.0.1 | POST    "/api/internal?uploadThread"
+[2025-11-27 18:55:59] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:55:59 | 200 |        6.148s |       127.0.0.1 | POST    "/api/provider/anthropic/v1/messages"
+[2025-11-27 18:55:59] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:55:59 | 200 |          46ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 18:55:59] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:55:59 | 200 |          46ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 18:55:59] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:55:59 | 200 |          45ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 18:56:00] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:56:00 | 200 |          49ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 18:56:00] [debug] [manager.go:475] Use API key FRDX...SxgN for model claude-opus-4-5-20251101
+[2025-11-27 18:56:02] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:56:02 | 200 |          87ms |       127.0.0.1 | POST    "/api/internal?uploadThread"
+[2025-11-27 18:56:05] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:56:05 | 200 |        5.275s |       127.0.0.1 | POST    "/api/provider/anthropic/v1/messages"
+[2025-11-27 18:56:05] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:56:05 | 200 |         153ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 18:56:05] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:56:05 | 200 |         111ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 18:56:06] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:56:06 | 200 |         137ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 18:56:06] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:56:06 | 200 |          48ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 18:56:06] [debug] [manager.go:475] Use API key FRDX...SxgN for model claude-opus-4-5-20251101
+[2025-11-27 18:56:08] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:56:08 | 200 |          70ms |       127.0.0.1 | POST    "/api/internal?uploadThread"
+[2025-11-27 18:56:17] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:56:17 | 200 |       11.096s |       127.0.0.1 | POST    "/api/provider/anthropic/v1/messages"
+[2025-11-27 18:56:17] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:56:17 | 200 |          46ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 18:56:18] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:56:18 | 200 |          48ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 18:56:18] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:56:18 | 200 |          46ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 18:56:18] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:56:18 | 200 |          50ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 18:56:19] [debug] [manager.go:475] Use API key FRDX...SxgN for model claude-opus-4-5-20251101
+[2025-11-27 18:56:19] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:56:19 | 200 |          73ms |       127.0.0.1 | POST    "/api/internal?uploadThread"
+[2025-11-27 18:56:28] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:56:28 | 200 |          75ms |       127.0.0.1 | POST    "/api/internal?uploadThread"
+[2025-11-27 18:56:29] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:56:29 | 200 |        10.23s |       127.0.0.1 | POST    "/api/provider/anthropic/v1/messages"
+[2025-11-27 18:56:29] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:56:29 | 200 |          47ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 18:56:29] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:56:29 | 200 |          48ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 18:56:30] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:56:30 | 200 |          47ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 18:56:30] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:56:30 | 200 |          48ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 18:56:30] [debug] [manager.go:475] Use API key FRDX...SxgN for model claude-opus-4-5-20251101
+[2025-11-27 18:56:32] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:56:32 | 200 |          90ms |       127.0.0.1 | POST    "/api/internal?uploadThread"
+[2025-11-27 18:56:41] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:56:41 | 200 |          78ms |       127.0.0.1 | POST    "/api/internal?uploadThread"
+[2025-11-27 18:56:44] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:56:44 | 200 |          71ms |       127.0.0.1 | POST    "/api/internal?uploadThread"
+[2025-11-27 18:56:50] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:56:50 | 200 |          91ms |       127.0.0.1 | POST    "/api/internal?uploadThread"
+[2025-11-27 18:56:53] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:56:53 | 200 |          88ms |       127.0.0.1 | POST    "/api/internal?uploadThread"
+[2025-11-27 18:56:59] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:56:59 | 200 |          77ms |       127.0.0.1 | POST    "/api/internal?uploadThread"
+[2025-11-27 18:57:02] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:57:02 | 200 |          88ms |       127.0.0.1 | POST    "/api/internal?uploadThread"
+[2025-11-27 18:57:06] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:57:06 | 200 |          76ms |       127.0.0.1 | POST    "/api/internal?uploadThread"
+[2025-11-27 18:57:12] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:57:12 | 200 |          72ms |       127.0.0.1 | POST    "/api/internal?uploadThread"
+[2025-11-27 18:57:14] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:57:14 | 200 |          72ms |       127.0.0.1 | POST    "/api/internal?uploadThread"
+[2025-11-27 18:57:18] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:57:18 | 200 |          79ms |       127.0.0.1 | POST    "/api/internal?uploadThread"
+[2025-11-27 18:57:21] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:57:21 | 200 |       51.374s |       127.0.0.1 | POST    "/api/provider/anthropic/v1/messages"
+[2025-11-27 18:57:21] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:57:21 | 200 |          46ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 18:57:22] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:57:22 | 200 |          44ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 18:57:22] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:57:22 | 200 |          47ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 18:57:22] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:57:22 | 200 |          47ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 18:57:22] [debug] [manager.go:475] Use API key FRDX...SxgN for model claude-opus-4-5-20251101
+[2025-11-27 18:57:24] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:57:24 | 200 |          79ms |       127.0.0.1 | POST    "/api/internal?uploadThread"
+[2025-11-27 18:57:32] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:57:32 | 200 |         125ms |       127.0.0.1 | POST    "/api/internal?uploadThread"
+[2025-11-27 18:57:38] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:57:38 | 200 |          73ms |       127.0.0.1 | POST    "/api/internal?uploadThread"
+[2025-11-27 18:57:44] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:57:44 | 200 |          72ms |       127.0.0.1 | POST    "/api/internal?uploadThread"
+[2025-11-27 18:57:49] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:57:49 | 200 |          73ms |       127.0.0.1 | POST    "/api/internal?uploadThread"
+[2025-11-27 18:57:55] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:57:55 | 200 |          78ms |       127.0.0.1 | POST    "/api/internal?uploadThread"
+[2025-11-27 18:58:01] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:58:01 | 200 |          81ms |       127.0.0.1 | POST    "/api/internal?uploadThread"
+[2025-11-27 18:58:04] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:58:04 | 200 |          77ms |       127.0.0.1 | POST    "/api/internal?uploadThread"
+[2025-11-27 18:58:10] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:58:10 | 200 |          88ms |       127.0.0.1 | POST    "/api/internal?uploadThread"
+[2025-11-27 18:58:11] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 18:58:11 | 200 |       48.742s |       127.0.0.1 | POST    "/api/provider/anthropic/v1/messages"

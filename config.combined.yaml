@@ -26,9 +26,7 @@ remote-management:
 auth-dir: "~/.cli-proxy-api"
 
 # API keys cho xác thực proxy (client gọi vào CLIProxyAPI)
-api-keys:
-  - "your-api-key-1"
-  - "your-api-key-2"
+api-keys: []
 
 # Bật debug logging (khuyến nghị khi troubleshooting)
 debug: true
@@ -117,16 +115,16 @@ claude-api-key:
 # =============================================================================
 # PAYLOAD RULES (Tùy chọn - Điều chỉnh tham số cho từng model)
 # =============================================================================
-#payload:
-#  default: # Chỉ đặt khi tham số chưa có trong payload
-#    - models:
-#        - name: "gemini-2.5-pro"
-#          protocol: "gemini"
-#      params:
-#        "generationConfig.thinkingConfig.thinkingBudget": 32768
-#  override: # Luôn ghi đè tham số
-#    - models:
-#        - name: "gpt-*"
-#          protocol: "codex"
-#      params:
-#        "reasoning.effort": "high"
+payload:
+  default: # Chỉ đặt khi tham số chưa có trong payload
+    - models:
+        - name: "gemini-3.5-pro"
+          protocol: "gemini"
+      params:
+        "generationConfig.thinkingConfig.thinkingBudget": 32768
+  override: # Luôn ghi đè tham số
+    - models:
+        - name: "gpt-*"
+          protocol: "codex"
+      params:
+        "reasoning.effort": "high"
