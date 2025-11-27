@@ -74,6 +74,9 @@ func (e *ClaudeExecutor) Execute(ctx context.Context, auth *cliproxyauth.Auth, r
 	var extraBetas []string
 	extraBetas, body = extractAndRemoveBetas(body)
 
+	// [AZURE-FIX] Sanitize tool names for Azure Foundry compatibility
+	body = sanitizeToolNames(body)
+
 	url := fmt.Sprintf("%s/v1/messages?beta=true", baseURL)
 	httpReq, err := http.NewRequestWithContext(ctx, http.MethodPost, url, bytes.NewReader(body))
 	if err != nil {
@@ -175,6 +178,9 @@ func (e *ClaudeExecutor) ExecuteStream(ctx context.Context, auth *cliproxyauth.A
 	// Extract betas from body and convert to header
 	var extraBetas []string
 	extraBetas, body = extractAndRemoveBetas(body)
+
+	// [AZURE-FIX] Sanitize tool names for Azure Foundry compatibility
+	body = sanitizeToolNames(body)
 
 	url := fmt.Sprintf("%s/v1/messages?beta=true", baseURL)
 	httpReq, err := http.NewRequestWithContext(ctx, http.MethodPost, url, bytes.NewReader(body))
@@ -737,4 +743,33 @@ func checkSystemInstructions(payload []byte) []byte {
 		payload, _ = sjson.SetRawBytes(payload, "system", []byte(claudeCodeInstructions))
 	}
 	return payload
+}
+
+// sanitizeToolNames replaces invalid characters in tool names with underscores
+// to comply with Azure Foundry requirements (pattern: '^[a-zA-Z0-9_-]{1,128}$')
+func sanitizeToolNames(body []byte) []byte {
+	tools := gjson.GetBytes(body, "tools")
+	if !tools.Exists() || !tools.IsArray() {
+		return body
+	}
+
+	tools.ForEach(func(key, value gjson.Result) bool {
+		name := value.Get("name").String()
+		// Replace dots, colons and other invalid chars with underscores
+		newName := strings.Map(func(r rune) rune {
+			if (r >= 'a' && r <= 'z') || (r >= 'A' && r <= 'Z') || (r >= '0' && r <= '9') || r == '-' || r == '_' {
+				return r
+			}
+			return '_'
+		}, name)
+
+		if name != newName {
+			// We need to update the name. key is the index in the array.
+			// sjson path for array element: tools.0.name
+			path := fmt.Sprintf("tools.%s.name", key.String())
+			body, _ = sjson.SetBytes(body, path, newName)
+		}
+		return true
+	})
+	return body
 }

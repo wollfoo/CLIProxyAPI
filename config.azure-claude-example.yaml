@@ -1,0 +1,85 @@
+# CLIProxyAPI Configuration for Azure AI Foundry (Claude) Integration
+# Usage:
+# 1. Rename this file to config.yaml
+# 2. Replace YOUR_AZURE_API_KEY and YOUR_RESOURCE_NAME with your actual values
+# 3. Run: ./cli-proxy-api --config config.yaml
+
+# Server port
+port: 8317
+
+# TLS settings (disabled for local proxy)
+tls:
+  enable: false
+  cert: ""
+  key: ""
+
+# Management API settings
+remote-management:
+  allow-remote: false
+  secret-key: "" # Leave empty to disable management API auth or generate a random key
+  disable-control-panel: false
+
+# Authentication directory
+auth-dir: "~/.cli-proxy-api"
+
+# Enable debug logging (recommended for troubleshooting model names)
+debug: true
+
+# Log to file (optional)
+logging-to-file: false
+
+# Amp integration settings
+amp-upstream-url: "https://ampcode.com"
+amp-restrict-management-to-localhost: true
+
+# Usage statistics
+usage-statistics-enabled: false
+
+# Retry configuration
+request-retry: 3
+max-retry-interval: 30
+
+# Quota behavior
+quota-exceeded:
+  switch-project: true
+  switch-preview-model: true
+
+# [CRITICAL] Azure AI Foundry (Claude) Configuration
+# This section forces Amp CLI requests to use your Azure endpoint instead of fallback
+claude-api-key:
+  - api-key: "YOUR_AZURE_API_KEY"
+    # Format: https://<your-resource-name>.services.ai.azure.com/anthropic
+    base-url: "https://YOUR_RESOURCE_NAME.services.ai.azure.com/anthropic"
+    
+    # Azure Foundry requires specific headers
+    headers:
+      anthropic-version: "2023-06-01"
+      x-api-key: "YOUR_AZURE_API_KEY" # Must match api-key above
+    
+    # Model Mappings: Amp CLI Model Name -> Azure Foundry Model Name
+    models:
+      # --- Haiku Models ---
+      # Amp typically requests: claude-haiku-4-5-20251001
+      - name: "claude-haiku-4-5"          # Azure Model Name
+        alias: "claude-haiku-4-5-20251001" # Amp CLI Model Alias
+      - name: "claude-haiku-4-5"
+        alias: "claude-haiku-4-5"
+
+      # --- Sonnet Models ---
+      # Amp typically requests: claude-sonnet-4-5-20250929
+      - name: "claude-sonnet-4-5"
+        alias: "claude-sonnet-4-5-20250929"
+      - name: "claude-sonnet-4-5"
+        alias: "claude-sonnet-4-5"
+      
+      # --- Opus Models ---
+      # Amp typically requests: claude-opus-4-5-20251101
+      - name: "claude-opus-4-5"
+        alias: "claude-opus-4-5-20251101"
+      - name: "claude-opus-4-5"
+        alias: "claude-opus-4-5"
+      - name: "claude-opus-4-1"
+        alias: "claude-opus-4-1"
+
+# Optional: WebSocket Authentication
+ws-auth: false
