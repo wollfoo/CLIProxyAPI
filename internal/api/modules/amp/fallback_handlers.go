@@ -8,6 +8,7 @@ import (
 	"strings"
 
 	"github.com/gin-gonic/gin"
+	"github.com/router-for-me/CLIProxyAPI/v6/internal/config"
 	"github.com/router-for-me/CLIProxyAPI/v6/internal/util"
 	log "github.com/sirupsen/logrus"
 )
@@ -16,6 +17,7 @@ import (
 // when the model's provider is not available in CLIProxyAPI
 type FallbackHandler struct {
 	getProxy func() *httputil.ReverseProxy
+	getConfig func() *config.Config // Thêm để check claude-api-key aliases
 }
 
 // NewFallbackHandler creates a new fallback handler wrapper
@@ -23,6 +25,15 @@ type FallbackHandler struct {
 func NewFallbackHandler(getProxy func() *httputil.ReverseProxy) *FallbackHandler {
 	return &FallbackHandler{
 		getProxy: getProxy,
+	}
+}
+
+// NewFallbackHandlerWithConfig creates a new fallback handler wrapper with config access
+// Cho phép check claude-api-key aliases để ép dùng Azure Claude thay vì fallback
+func NewFallbackHandlerWithConfig(getProxy func() *httputil.ReverseProxy, getConfig func() *config.Config) *FallbackHandler {
+	return &FallbackHandler{
+		getProxy:  getProxy,
+		getConfig: getConfig,
 	}
 }
 
@@ -54,6 +65,12 @@ func (fh *FallbackHandler) WrapHandler(handler gin.HandlerFunc) gin.HandlerFunc 
 
 		// Check if we have providers for this model
 		providers := util.GetProviderName(normalizedModel)
+
+		// [AZURE-CLAUDE] Check thêm: nếu model match với claude-api-key aliases, coi như có provider
+		if len(providers) == 0 && fh.hasClaudeAPIKeyAlias(modelName) {
+			log.Infof("amp fallback: model %s matched claude-api-key alias, using local provider", modelName)
+			providers = []string{"claude"}
+		}
 
 		if len(providers) == 0 {
 			// No providers configured - check if we have a proxy for fallback
@@ -127,3 +144,51 @@ func extractModelFromRequest(body []byte, c *gin.Context) string {
 
 	return ""
 }
+
+// hasClaudeAPIKeyAlias checks if the model name matches any alias in claude-api-key config
+// Hàm này kiểm tra xem model có match với aliases trong config.yaml không
+// Ví dụ: claude-haiku-4-5-20251001 có thể được map sang claude-sonnet-4-20250514 (Azure)
+func (fh *FallbackHandler) hasClaudeAPIKeyAlias(modelName string) bool {
+	if fh.getConfig == nil {
+		return false
+	}
+	cfg := fh.getConfig()
+	if cfg == nil || len(cfg.ClaudeKey) == 0 {
+		return false
+	}
+
+	modelLower := strings.ToLower(strings.TrimSpace(modelName))
+	if modelLower == "" {
+		return false
+	}
+
+	// Check từng claude-api-key entry
+	for _, ck := range cfg.ClaudeKey {
+		// Nếu có models aliases được định nghĩa
+		if len(ck.Models) > 0 {
+			for _, model := range ck.Models {
+				alias := strings.ToLower(strings.TrimSpace(model.Alias))
+				name := strings.ToLower(strings.TrimSpace(model.Name))
+				// Match nếu alias hoặc name trùng với model được request
+				if alias != "" && alias == modelLower {
+					return true
+				}
+				if name != "" && name == modelLower {
+					return true
+				}
+			}
+		} else {
+			// Nếu không có models aliases, check xem có base-url và api-key không
+			// Có nghĩa là đây là Claude API key config, có thể xử lý mọi Claude model
+			if strings.TrimSpace(ck.BaseURL) != "" && strings.TrimSpace(ck.APIKey) != "" {
+				// Nếu model bắt đầu bằng "claude-", coi như có thể xử lý
+				if strings.HasPrefix(modelLower, "claude-") {
+					return true
+				}
+			}
+		}
+	}
+
+	return false
+}
+

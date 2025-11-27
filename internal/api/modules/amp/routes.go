@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/gin-gonic/gin"
+	"github.com/router-for-me/CLIProxyAPI/v6/internal/config"
 	"github.com/router-for-me/CLIProxyAPI/v6/internal/util"
 	"github.com/router-for-me/CLIProxyAPI/v6/sdk/api/handlers"
 	"github.com/router-for-me/CLIProxyAPI/v6/sdk/api/handlers/claude"
@@ -162,9 +163,15 @@ func (m *AmpModule) registerProviderAliases(engine *gin.Engine, baseHandler *han
 
 	// Create fallback handler wrapper that forwards to ampcode.com when provider not found
 	// Uses lazy evaluation to access proxy (which is created after routes are registered)
-	fallbackHandler := NewFallbackHandler(func() *httputil.ReverseProxy {
-		return m.proxy
-	})
+	// [AZURE-CLAUDE] Sử dụng NewFallbackHandlerWithConfig để có thể check claude-api-key aliases
+	fallbackHandler := NewFallbackHandlerWithConfig(
+		func() *httputil.ReverseProxy {
+			return m.proxy
+		},
+		func() *config.Config {
+			return m.GetConfig()
+		},
+	)
 
 	// Provider-specific routes under /api/provider/:provider
 	ampProviders := engine.Group("/api/provider")

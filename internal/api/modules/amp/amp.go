@@ -30,6 +30,8 @@ type AmpModule struct {
 	authMiddleware_ gin.HandlerFunc
 	enabled         bool
 	registerOnce    sync.Once
+	cfg             *config.Config // [AZURE-CLAUDE] Lưu config để FallbackHandler có thể check claude-api-key aliases
+	cfgMu           sync.RWMutex   // Mutex bảo vệ config access
 }
 
 // New creates a new Amp routing module with the given options.
@@ -93,6 +95,11 @@ func (m *AmpModule) Name() string {
 // This implements the RouteModuleV2 interface with Context.
 // Routes are registered only once via sync.Once for idempotent behavior.
 func (m *AmpModule) Register(ctx modules.Context) error {
+	// [AZURE-CLAUDE] Lưu config reference để FallbackHandler có thể check claude-api-key aliases
+	m.cfgMu.Lock()
+	m.cfg = ctx.Config
+	m.cfgMu.Unlock()
+
 	upstreamURL := strings.TrimSpace(ctx.Config.AmpUpstreamURL)
 
 	// Determine auth middleware (from module or context)
@@ -159,6 +166,11 @@ func (m *AmpModule) getAuthMiddleware(ctx modules.Context) gin.HandlerFunc {
 // OnConfigUpdated handles configuration updates.
 // Currently requires restart for URL changes (could be enhanced for dynamic updates).
 func (m *AmpModule) OnConfigUpdated(cfg *config.Config) error {
+	// [AZURE-CLAUDE] Update config reference để FallbackHandler có thể check claude-api-key aliases mới
+	m.cfgMu.Lock()
+	m.cfg = cfg
+	m.cfgMu.Unlock()
+
 	if !m.enabled {
 		log.Debug("Amp routing not enabled, skipping config update")
 		return nil
@@ -180,4 +192,12 @@ func (m *AmpModule) OnConfigUpdated(cfg *config.Config) error {
 
 	log.Debug("Amp config updated (restart required for URL changes)")
 	return nil
+}
+
+// GetConfig returns the current config (thread-safe)
+// [AZURE-CLAUDE] Dùng để FallbackHandler có thể check claude-api-key aliases
+func (m *AmpModule) GetConfig() *config.Config {
+	m.cfgMu.RLock()
+	defer m.cfgMu.RUnlock()
+	return m.cfg
 }
