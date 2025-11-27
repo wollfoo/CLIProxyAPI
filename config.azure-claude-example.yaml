@@ -30,6 +30,7 @@ logging-to-file: false
 
 # Amp integration settings
 amp-upstream-url: "https://ampcode.com"
+amp-upstream-api-key: ""
 amp-restrict-management-to-localhost: true
 
 # Usage statistics

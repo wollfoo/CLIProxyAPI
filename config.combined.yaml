@@ -1,0 +1,132 @@
+# CLIProxyAPI Configuration - Kết hợp Gemini + Codex + Azure Claude
+# Sử dụng (Usage):
+# 1. Đổi tên file này thành config.yaml
+# 2. Thay thế YOUR_AZURE_API_KEY và YOUR_RESOURCE_NAME bằng giá trị thực
+# 3. Chạy: ./cli-proxy-api --config config.yaml
+#
+# LƯU Ý: Gemini và Codex đã đăng nhập qua OAuth sẽ tự động được sử dụng
+#        từ thư mục auth-dir (~/.cli-proxy-api)
+
+# Server port
+port: 8317
+
+# TLS settings (tắt cho local proxy)
+tls:
+  enable: false
+  cert: ""
+  key: ""
+
+# Management API settings
+remote-management:
+  allow-remote: false
+  secret-key: "" # Để trống hoặc đặt key quản lý
+  disable-control-panel: false
+
+# Thư mục xác thực - nơi lưu OAuth tokens cho Gemini và Codex
+auth-dir: "~/.cli-proxy-api"
+
+# API keys cho xác thực proxy (client gọi vào CLIProxyAPI)
+api-keys:
+  - "your-api-key-1"
+  - "your-api-key-2"
+
+# Bật debug logging (khuyến nghị khi troubleshooting)
+debug: true
+
+# Log to file (tùy chọn)
+logging-to-file: false
+
+# Amp integration settings
+amp-upstream-url: "https://ampcode.com"
+amp-upstream-api-key: ""  # Để trống - tự động đọc từ ~/.local/share/amp/secrets.json
+amp-restrict-management-to-localhost: true
+
+# Usage statistics
+usage-statistics-enabled: false
+
+# Proxy URL (nếu cần proxy ra internet)
+# proxy-url: "socks5://user:pass@192.168.1.1:1080/"
+
+# Retry configuration
+request-retry: 3
+max-retry-interval: 30
+
+# Quota behavior - tự động chuyển khi hết quota
+quota-exceeded:
+  switch-project: true
+  switch-preview-model: true
+
+# WebSocket Authentication
+ws-auth: false
+
+# =============================================================================
+# PROVIDER 1: GEMINI (Đã đăng nhập qua OAuth)
+# =============================================================================
+# Gemini tokens được tự động load từ auth-dir khi đã đăng nhập.
+# Nếu muốn dùng API key thay vì OAuth, uncomment phần dưới:
+#gemini-api-key:
+#  - api-key: "AIzaSy...01"
+#    base-url: "https://generativelanguage.googleapis.com"
+
+# =============================================================================
+# PROVIDER 2: CODEX (Đã đăng nhập qua OAuth)
+# =============================================================================
+# Codex tokens được tự động load từ auth-dir khi đã đăng nhập.
+# Nếu muốn dùng API key thay vì OAuth, uncomment phần dưới:
+#codex-api-key:
+#  - api-key: "sk-atSM..."
+#    base-url: "https://api.openai.com"
+
+# =============================================================================
+# PROVIDER 3: AZURE CLAUDE (API Key)
+# =============================================================================
+# [CRITICAL] Azure AI Foundry (Claude) Configuration
+# Phần này định tuyến các yêu cầu Claude sang Azure endpoint của bạn
+claude-api-key:
+  - api-key: "YOUR_AZURE_API_KEY"
+    # Format: https://<your-resource-name>.services.ai.azure.com/anthropic
+    base-url: "https://YOUR_RESOURCE_NAME.services.ai.azure.com/anthropic"
+    
+    # Azure Foundry yêu cầu headers cụ thể
+    headers:
+      anthropic-version: "2023-06-01"
+      x-api-key: "YOUR_AZURE_API_KEY" # Phải khớp với api-key ở trên
+    
+    # Model Mappings: Amp CLI Model Name -> Azure Foundry Model Name
+    models:
+      # --- Haiku Models ---
+      - name: "claude-haiku-4-5"
+        alias: "claude-haiku-4-5-20251001"
+      - name: "claude-haiku-4-5"
+        alias: "claude-haiku-4-5"
+
+      # --- Sonnet Models ---
+      - name: "claude-sonnet-4-5"
+        alias: "claude-sonnet-4-5-20250929"
+      - name: "claude-sonnet-4-5"
+        alias: "claude-sonnet-4-5"
+      
+      # --- Opus Models ---
+      - name: "claude-opus-4-5"
+        alias: "claude-opus-4-5-20251101"
+      - name: "claude-opus-4-5"
+        alias: "claude-opus-4-5"
+      - name: "claude-opus-4-1"
+        alias: "claude-opus-4-1"
+
+# =============================================================================
+# PAYLOAD RULES (Tùy chọn - Điều chỉnh tham số cho từng model)
+# =============================================================================
+#payload:
+#  default: # Chỉ đặt khi tham số chưa có trong payload
+#    - models:
+#        - name: "gemini-2.5-pro"
+#          protocol: "gemini"
+#      params:
+#        "generationConfig.thinkingConfig.thinkingBudget": 32768
+#  override: # Luôn ghi đè tham số
+#    - models:
+#        - name: "gpt-*"
+#          protocol: "codex"
+#      params:
+#        "reasoning.effort": "high"

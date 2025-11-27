@@ -1,0 +1,36 @@
+[2025-11-27 17:00:51] [debug] [credentials.go:25] -------------------------------------------------------------------
+[2025-11-27 17:02:59] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 17:02:59 | 200 |          86ms |       127.0.0.1 | POST    "/api/internal?getUserInfo"
+[2025-11-27 17:06:29] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 17:06:29 | 200 |          56ms |       127.0.0.1 | POST    "/api/internal?getUserInfo"
+[2025-11-27 17:06:29] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 17:06:29 | 200 |          58ms |       127.0.0.1 | POST    "/api/internal?getUserFreeTierStatus"
+[2025-11-27 17:06:30] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 17:06:30 | 200 |          55ms |       127.0.0.1 | POST    "/api/internal?getCurrentAd"
+[2025-11-27 17:06:30] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 17:06:30 | 200 |          55ms |       127.0.0.1 | POST    "/api/internal?getUserInfo"
+[2025-11-27 17:06:30] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 17:06:30 | 200 |          56ms |       127.0.0.1 | POST    "/api/internal?getUserInfo"
+[2025-11-27 17:06:30] [warning] [gin_logger.go:56] [GIN] 2025/11/27 - 17:06:30 | 404 |            0s |       127.0.0.1 | GET     "/threads.rss"
+[2025-11-27 17:06:30] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 17:06:30 | 200 |          88ms |       127.0.0.1 | POST    "/api/telemetry"
+[2025-11-27 17:06:59] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 17:06:59 | 200 |          40ms |       127.0.0.1 | POST    "/api/internal?getUserInfo"
+[2025-11-27 17:06:59] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 17:06:59 | 200 |          40ms |       127.0.0.1 | POST    "/api/internal?getUserFreeTierStatus"
+[2025-11-27 17:06:59] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 17:06:59 | 200 |          38ms |       127.0.0.1 | POST    "/api/internal?getCurrentAd"
+[2025-11-27 17:06:59] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 17:06:59 | 200 |          40ms |       127.0.0.1 | POST    "/api/internal?getUserInfo"
+[2025-11-27 17:06:59] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 17:06:59 | 200 |          55ms |       127.0.0.1 | POST    "/api/internal?getUserInfo"
+[2025-11-27 17:06:59] [warning] [gin_logger.go:56] [GIN] 2025/11/27 - 17:06:59 | 404 |            0s |       127.0.0.1 | GET     "/threads.rss"
+[2025-11-27 17:06:59] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 17:06:59 | 200 |         108ms |       127.0.0.1 | POST    "/api/telemetry"
+[2025-11-27 17:07:14] [debug] [manager.go:379] Use API key FRDX...SxgN for model claude-haiku-4-5-20251001
+[2025-11-27 17:07:15] [debug] [manager.go:475] Use API key FRDX...SxgN for model claude-opus-4-5-20251101
+[2025-11-27 17:07:16] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 17:07:16 | 200 |        1.918s |       127.0.0.1 | POST    "/api/provider/anthropic/v1/messages"
+[2025-11-27 17:07:16] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 17:07:16 | 200 |          48ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 17:07:17] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 17:07:17 | 200 |          67ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 17:07:17] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 17:07:17 | 200 |          39ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 17:07:17] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 17:07:17 | 200 |          42ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 17:07:17] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 17:07:17 | 200 |          75ms |       127.0.0.1 | POST    "/api/internal?uploadThread"
+[2025-11-27 17:07:20] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 17:07:20 | 200 |        4.921s |       127.0.0.1 | POST    "/api/provider/anthropic/v1/messages"
+[2025-11-27 17:07:20] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 17:07:20 | 200 |          37ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 17:07:20] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 17:07:20 | 200 |          41ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 17:07:20] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 17:07:20 | 200 |          54ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 17:07:21] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 17:07:21 | 200 |          37ms |       127.0.0.1 | POST    "/api/internal?getCreditsByRequestId"
+[2025-11-27 17:07:21] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 17:07:21 | 200 |          40ms |       127.0.0.1 | POST    "/api/internal?extractWebPageContent"
+[2025-11-27 17:07:21] [debug] [manager.go:475] Use API key FRDX...SxgN for model claude-opus-4-5-20251101
+[2025-11-27 17:07:23] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 17:07:23 | 200 |          69ms |       127.0.0.1 | POST    "/api/internal?uploadThread"
+[2025-11-27 17:07:24] [info] [gin_logger.go:58] [GIN] 2025/11/27 - 17:07:24 | 200 |        3.772s |       127.0.0.1 | POST    "/api/provider/anthropic/v1/messages"
+
+
+

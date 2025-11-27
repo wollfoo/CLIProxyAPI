@@ -1,0 +1,286 @@
+azureuser@97dd9930b6894b1bbee820b562143023000000:~/CLIProxyAPI$ ./cli-proxy-api --config config.yaml
+CLIProxyAPI Version: dev, Commit: none, BuiltAt: unknown
+[2025-11-27 17:00:51] [info] [main.go:397] CLIProxyAPI Version: dev, Commit: none, BuiltAt: unknown
+[2025-11-27 17:00:51] [info] [util.go:30] log level changed from info to debug (debug=true)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:   export GIN_MODE=release
+ - using code:  gin.SetMode(gin.ReleaseMode)
+[2025-11-27 17:00:51] [debug] [reconcile.go:159] auth providers unchanged after config update
+[2025-11-27 17:00:51] [info] [global_logger.go:61] GET    /management.html          --> github.com/router-for-me/CLIProxyAPI/v6/internal/api.(*Server).serveManagementControlPanel-fm (5 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] GET    /v1/models                --> github.com/router-for-me/CLIProxyAPI/v6/internal/api.(*Server).setupRoutes.(*Server).unifiedModelsHandler.func8 (6 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] POST   /v1/chat/completions      --> github.com/router-for-me/CLIProxyAPI/v6/sdk/api/handlers/openai.(*OpenAIAPIHandler).ChatCompletions-fm (6 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] POST   /v1/completions           --> github.com/router-for-me/CLIProxyAPI/v6/sdk/api/handlers/openai.(*OpenAIAPIHandler).Completions-fm (6 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] POST   /v1/messages              --> github.com/router-for-me/CLIProxyAPI/v6/sdk/api/handlers/claude.(*ClaudeCodeAPIHandler).ClaudeMessages-fm (6 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] POST   /v1/messages/count_tokens --> github.com/router-for-me/CLIProxyAPI/v6/sdk/api/handlers/claude.(*ClaudeCodeAPIHandler).ClaudeCountTokens-fm (6 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] POST   /v1/responses             --> github.com/router-for-me/CLIProxyAPI/v6/sdk/api/handlers/openai.(*OpenAIResponsesAPIHandler).Responses-fm (6 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] GET    /v1beta/models            --> github.com/router-for-me/CLIProxyAPI/v6/sdk/api/handlers/gemini.(*GeminiAPIHandler).GeminiModels-fm (6 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] POST   /v1beta/models/:action    --> github.com/router-for-me/CLIProxyAPI/v6/sdk/api/handlers/gemini.(*GeminiAPIHandler).GeminiHandler-fm (6 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] GET    /v1beta/models/:action    --> github.com/router-for-me/CLIProxyAPI/v6/sdk/api/handlers/gemini.(*GeminiAPIHandler).GeminiGetHandler-fm (6 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] GET    /                         --> github.com/router-for-me/CLIProxyAPI/v6/internal/api.(*Server).setupRoutes.func1 (5 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] POST   /v1internal:method        --> github.com/router-for-me/CLIProxyAPI/v6/sdk/api/handlers/gemini.(*GeminiCLIAPIHandler).CLIHandler-fm (5 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] GET    /anthropic/callback       --> github.com/router-for-me/CLIProxyAPI/v6/internal/api.(*Server).setupRoutes.func2 (5 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] GET    /codex/callback           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api.(*Server).setupRoutes.func3 (5 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] GET    /google/callback          --> github.com/router-for-me/CLIProxyAPI/v6/internal/api.(*Server).setupRoutes.func4 (5 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] GET    /iflow/callback           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api.(*Server).setupRoutes.func5 (5 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] GET    /antigravity/callback     --> github.com/router-for-me/CLIProxyAPI/v6/internal/api.(*Server).setupRoutes.func6 (5 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] GET    /api/provider/:provider/models --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).registerProviderAliases.func3 (6 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] POST   /api/provider/:provider/chat/completions --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).registerProviderAliases.(*FallbackHandler).WrapHandler.func4 (6 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] POST   /api/provider/:provider/completions --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).registerProviderAliases.(*FallbackHandler).WrapHandler.func5 (6 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] POST   /api/provider/:provider/responses --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).registerProviderAliases.(*FallbackHandler).WrapHandler.func6 (6 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] GET    /api/provider/:provider/v1/models --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).registerProviderAliases.func3 (6 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] POST   /api/provider/:provider/v1/chat/completions --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).registerProviderAliases.(*FallbackHandler).WrapHandler.func7 (6 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] POST   /api/provider/:provider/v1/completions --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).registerProviderAliases.(*FallbackHandler).WrapHandler.func8 (6 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] POST   /api/provider/:provider/v1/responses --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).registerProviderAliases.(*FallbackHandler).WrapHandler.func9 (6 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] POST   /api/provider/:provider/v1/messages --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).registerProviderAliases.(*FallbackHandler).WrapHandler.func10 (6 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] POST   /api/provider/:provider/v1/messages/count_tokens --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).registerProviderAliases.(*FallbackHandler).WrapHandler.func11 (6 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] GET    /api/provider/:provider/v1beta/models --> github.com/router-for-me/CLIProxyAPI/v6/sdk/api/handlers/gemini.(*GeminiAPIHandler).GeminiModels-fm (6 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] POST   /api/provider/:provider/v1beta/models/:action --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).registerProviderAliases.(*FallbackHandler).WrapHandler.func12 (6 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] GET    /api/provider/:provider/v1beta/models/:action --> github.com/router-for-me/CLIProxyAPI/v6/sdk/api/handlers/gemini.(*GeminiAPIHandler).GeminiGetHandler-fm (6 handlers)
+[2025-11-27 17:00:51] [info] [routes.go:93] Amp management routes restricted to localhost only (CORS disabled)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] GET    /api/internal             --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] POST   /api/internal             --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] PUT    /api/internal             --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] PATCH  /api/internal             --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] HEAD   /api/internal             --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] OPTIONS /api/internal             --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] DELETE /api/internal             --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] CONNECT /api/internal             --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] TRACE  /api/internal             --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] GET    /api/internal/*path       --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] POST   /api/internal/*path       --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] PUT    /api/internal/*path       --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] PATCH  /api/internal/*path       --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] HEAD   /api/internal/*path       --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] OPTIONS /api/internal/*path       --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] DELETE /api/internal/*path       --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] CONNECT /api/internal/*path       --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] TRACE  /api/internal/*path       --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] GET    /api/user                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] POST   /api/user                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] PUT    /api/user                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] PATCH  /api/user                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] HEAD   /api/user                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] OPTIONS /api/user                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] DELETE /api/user                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] CONNECT /api/user                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] TRACE  /api/user                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] GET    /api/user/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] POST   /api/user/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] PUT    /api/user/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] PATCH  /api/user/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] HEAD   /api/user/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] OPTIONS /api/user/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] DELETE /api/user/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] CONNECT /api/user/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] TRACE  /api/user/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] GET    /api/auth                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] POST   /api/auth                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] PUT    /api/auth                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] PATCH  /api/auth                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] HEAD   /api/auth                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] OPTIONS /api/auth                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] DELETE /api/auth                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] CONNECT /api/auth                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] TRACE  /api/auth                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] GET    /api/auth/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] POST   /api/auth/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] PUT    /api/auth/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] PATCH  /api/auth/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] HEAD   /api/auth/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] OPTIONS /api/auth/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] DELETE /api/auth/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] CONNECT /api/auth/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] TRACE  /api/auth/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] GET    /api/meta                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] POST   /api/meta                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] PUT    /api/meta                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] PATCH  /api/meta                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] HEAD   /api/meta                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] OPTIONS /api/meta                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] DELETE /api/meta                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] CONNECT /api/meta                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] TRACE  /api/meta                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] GET    /api/meta/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] POST   /api/meta/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] PUT    /api/meta/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] PATCH  /api/meta/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] HEAD   /api/meta/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] OPTIONS /api/meta/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] DELETE /api/meta/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] CONNECT /api/meta/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] TRACE  /api/meta/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] GET    /api/ads                  --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] POST   /api/ads                  --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] PUT    /api/ads                  --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] PATCH  /api/ads                  --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] HEAD   /api/ads                  --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] OPTIONS /api/ads                  --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] DELETE /api/ads                  --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] CONNECT /api/ads                  --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] TRACE  /api/ads                  --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] GET    /api/telemetry            --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] POST   /api/telemetry            --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] PUT    /api/telemetry            --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] PATCH  /api/telemetry            --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] HEAD   /api/telemetry            --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] OPTIONS /api/telemetry            --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] DELETE /api/telemetry            --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] CONNECT /api/telemetry            --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] TRACE  /api/telemetry            --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] GET    /api/telemetry/*path      --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] POST   /api/telemetry/*path      --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] PUT    /api/telemetry/*path      --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] PATCH  /api/telemetry/*path      --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] HEAD   /api/telemetry/*path      --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] OPTIONS /api/telemetry/*path      --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] DELETE /api/telemetry/*path      --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] CONNECT /api/telemetry/*path      --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] TRACE  /api/telemetry/*path      --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] GET    /api/threads              --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] POST   /api/threads              --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] PUT    /api/threads              --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] PATCH  /api/threads              --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] HEAD   /api/threads              --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] OPTIONS /api/threads              --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] DELETE /api/threads              --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] CONNECT /api/threads              --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] TRACE  /api/threads              --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] GET    /api/threads/*path        --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] POST   /api/threads/*path        --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] PUT    /api/threads/*path        --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] PATCH  /api/threads/*path        --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] HEAD   /api/threads/*path        --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] OPTIONS /api/threads/*path        --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] DELETE /api/threads/*path        --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] CONNECT /api/threads/*path        --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] TRACE  /api/threads/*path        --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] GET    /api/otel                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] POST   /api/otel                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] PUT    /api/otel                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] PATCH  /api/otel                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] HEAD   /api/otel                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] OPTIONS /api/otel                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] DELETE /api/otel                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] CONNECT /api/otel                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] TRACE  /api/otel                 --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] GET    /api/otel/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] POST   /api/otel/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] PUT    /api/otel/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] PATCH  /api/otel/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] HEAD   /api/otel/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] OPTIONS /api/otel/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] DELETE /api/otel/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] CONNECT /api/otel/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] TRACE  /api/otel/*path           --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).Register.func1.proxyHandler.1 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] GET    /api/provider/google/v1beta1/*path --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func2 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] POST   /api/provider/google/v1beta1/*path --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func2 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] PUT    /api/provider/google/v1beta1/*path --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func2 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] PATCH  /api/provider/google/v1beta1/*path --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func2 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] HEAD   /api/provider/google/v1beta1/*path --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func2 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] OPTIONS /api/provider/google/v1beta1/*path --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func2 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] DELETE /api/provider/google/v1beta1/*path --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func2 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] CONNECT /api/provider/google/v1beta1/*path --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func2 (7 handlers)
+[2025-11-27 17:00:51] [info] [global_logger.go:61] TRACE  /api/provider/google/v1beta1/*path --> github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules/amp.(*AmpModule).registerManagementRoutes.func2 (7 handlers)
+[2025-11-27 17:00:51] [info] [amp.go:143] Amp upstream proxy enabled for: https://ampcode.com
+[2025-11-27 17:00:51] [debug] [amp.go:144] Amp provider alias routes registered
+[2025-11-27 17:00:51] [info] [global_logger.go:61] GET    /v1/ws                    --> github.com/router-for-me/CLIProxyAPI/v6/internal/api.(*Server).AttachWebsocketRoute.func2 (6 handlers)
+[2025-11-27 17:00:51] [debug] [server.go:721] Starting API server on :8317
+[2025-11-27 17:00:51] [debug] [updater.go:235] management asset is already up to date
+API server started successfully
+[2025-11-27 17:00:51] [debug] [watcher.go:159] watching config file: config.yaml
+[2025-11-27 17:00:51] [debug] [watcher.go:166] watching auth directory: /home/azureuser/.cli-proxy-api
+[2025-11-27 17:00:51] [debug] [watcher.go:668] starting full client load process
+[2025-11-27 17:00:51] [debug] [watcher.go:685] loaded 1 API key clients
+[2025-11-27 17:00:51] [debug] [watcher.go:1214] processing auth file 1: codex-nvt191655320@gmail.com.json
+[2025-11-27 17:00:51] [debug] [watcher.go:1214] processing auth file 2: gemini-nvt191655320@gmail.com-all.json
+[2025-11-27 17:00:51] [debug] [watcher.go:1226] auth directory scan complete - found 2 .json files, 2 readable
+[2025-11-27 17:00:51] [debug] [watcher.go:691] loaded 2 file-based clients
+[2025-11-27 17:00:51] [debug] [watcher.go:731] triggering server update callback before auth refresh
+[2025-11-27 17:00:51] [debug] [reconcile.go:159] auth providers unchanged after config update
+server clients and configuration updated: 3 clients (2 auth files + 0 Gemini API keys + 1 Claude API keys + 0 Codex keys + 0 OpenAI-compat)
+[2025-11-27 17:00:51] [debug] [updater.go:206] management asset update check skipped: last check was 0s ago (interval: 3h0m0s)
+[2025-11-27 17:00:51] [info] [watcher.go:737] full client load complete - 3 clients (2 auth files + 0 Gemini API keys + 1 Claude API keys + 0 Codex keys + 0 OpenAI-compat)
+[2025-11-27 17:00:51] [info] [service.go:515] file watcher started for config and auth directory changes
+[2025-11-27 17:00:51] [info] [service.go:521] core auth auto-refresh started (interval=15m0s)
+[2025-11-27 17:00:51] [debug] [model_registry.go:334] Registered new model gemini-2.5-pro from provider gemini-cli
+[2025-11-27 17:00:51] [debug] [model_registry.go:334] Registered new model gemini-2.5-flash from provider gemini-cli
+[2025-11-27 17:00:51] [debug] [model_registry.go:334] Registered new model gemini-2.5-flash-lite from provider gemini-cli
+[2025-11-27 17:00:51] [debug] [model_registry.go:334] Registered new model gemini-3-pro-preview from provider gemini-cli
+[2025-11-27 17:00:51] [debug] [model_registry.go:166] Registered client gemini-nvt191655320@gmail.com-all.json::swift-setup-464015-c2 from provider gemini-cli with 4 models
+[2025-11-27 17:00:51] [debug] [credentials.go:25] -------------------------------------------------------------------
+[2025-11-27 17:00:51] [debug] [model_registry.go:319] Incremented count for model gemini-2.5-pro, now 2 clients
+[2025-11-27 17:00:51] [debug] [model_registry.go:319] Incremented count for model gemini-2.5-flash, now 2 clients
+[2025-11-27 17:00:51] [debug] [model_registry.go:319] Incremented count for model gemini-2.5-flash-lite, now 2 clients
+[2025-11-27 17:00:51] [debug] [model_registry.go:319] Incremented count for model gemini-3-pro-preview, now 2 clients
+[2025-11-27 17:00:51] [debug] [model_registry.go:166] Registered client gemini-nvt191655320@gmail.com-all.json::gen-lang-client-0943836959 from provider gemini-cli with 4 models
+[2025-11-27 17:00:51] [debug] [credentials.go:25] -------------------------------------------------------------------
+[2025-11-27 17:00:51] [debug] [model_registry.go:319] Incremented count for model gemini-2.5-pro, now 3 clients
+[2025-11-27 17:00:51] [debug] [model_registry.go:319] Incremented count for model gemini-2.5-flash, now 3 clients
+[2025-11-27 17:00:51] [debug] [model_registry.go:319] Incremented count for model gemini-2.5-flash-lite, now 3 clients
+[2025-11-27 17:00:51] [debug] [model_registry.go:319] Incremented count for model gemini-3-pro-preview, now 3 clients
+[2025-11-27 17:00:51] [debug] [model_registry.go:166] Registered client gemini-nvt191655320@gmail.com-all.json::solar-dialect-271304 from provider gemini-cli with 4 models
+[2025-11-27 17:00:51] [debug] [credentials.go:25] -------------------------------------------------------------------
+[2025-11-27 17:00:51] [debug] [model_registry.go:334] Registered new model claude-haiku-4-5-20251001 from provider claude
+[2025-11-27 17:00:51] [debug] [model_registry.go:334] Registered new model claude-haiku-4-5 from provider claude
+[2025-11-27 17:00:51] [debug] [model_registry.go:334] Registered new model claude-sonnet-4-5-20250929 from provider claude
+[2025-11-27 17:00:51] [debug] [model_registry.go:334] Registered new model claude-sonnet-4-5 from provider claude
+[2025-11-27 17:00:51] [debug] [model_registry.go:334] Registered new model claude-opus-4-5-20251101 from provider claude
+[2025-11-27 17:00:51] [debug] [model_registry.go:334] Registered new model claude-opus-4-5 from provider claude
+[2025-11-27 17:00:51] [debug] [model_registry.go:334] Registered new model claude-opus-4-1 from provider claude
+[2025-11-27 17:00:51] [debug] [model_registry.go:166] Registered client claude:apikey:6d5852438f2f from provider claude with 7 models
+[2025-11-27 17:00:51] [debug] [credentials.go:25] -------------------------------------------------------------------
+[2025-11-27 17:00:51] [debug] [model_registry.go:334] Registered new model gpt-5 from provider codex
+[2025-11-27 17:00:51] [debug] [model_registry.go:334] Registered new model gpt-5-minimal from provider codex
+[2025-11-27 17:00:51] [debug] [model_registry.go:334] Registered new model gpt-5-low from provider codex
+[2025-11-27 17:00:51] [debug] [model_registry.go:334] Registered new model gpt-5-medium from provider codex
+[2025-11-27 17:00:51] [debug] [model_registry.go:334] Registered new model gpt-5-high from provider codex
+[2025-11-27 17:00:51] [debug] [model_registry.go:334] Registered new model gpt-5-codex from provider codex
+[2025-11-27 17:00:51] [debug] [model_registry.go:334] Registered new model gpt-5-codex-low from provider codex
+[2025-11-27 17:00:51] [debug] [model_registry.go:334] Registered new model gpt-5-codex-medium from provider codex
+[2025-11-27 17:00:51] [debug] [model_registry.go:334] Registered new model gpt-5-codex-high from provider codex
+[2025-11-27 17:00:51] [debug] [model_registry.go:334] Registered new model gpt-5-codex-mini from provider codex
+[2025-11-27 17:00:51] [debug] [model_registry.go:334] Registered new model gpt-5-codex-mini-medium from provider codex
+[2025-11-27 17:00:51] [debug] [model_registry.go:334] Registered new model gpt-5-codex-mini-high from provider codex
+[2025-11-27 17:00:51] [debug] [model_registry.go:334] Registered new model gpt-5.1 from provider codex
+[2025-11-27 17:00:51] [debug] [model_registry.go:334] Registered new model gpt-5.1-none from provider codex
+[2025-11-27 17:00:51] [debug] [model_registry.go:334] Registered new model gpt-5.1-low from provider codex
+[2025-11-27 17:00:51] [debug] [model_registry.go:334] Registered new model gpt-5.1-medium from provider codex
+[2025-11-27 17:00:51] [debug] [model_registry.go:334] Registered new model gpt-5.1-high from provider codex
+[2025-11-27 17:00:51] [debug] [model_registry.go:334] Registered new model gpt-5.1-codex from provider codex
+[2025-11-27 17:00:51] [debug] [model_registry.go:334] Registered new model gpt-5.1-codex-low from provider codex
+[2025-11-27 17:00:51] [debug] [model_registry.go:334] Registered new model gpt-5.1-codex-medium from provider codex
+[2025-11-27 17:00:51] [debug] [model_registry.go:334] Registered new model gpt-5.1-codex-high from provider codex
+[2025-11-27 17:00:51] [debug] [model_registry.go:334] Registered new model gpt-5.1-codex-mini from provider codex
+[2025-11-27 17:00:51] [debug] [model_registry.go:334] Registered new model gpt-5.1-codex-mini-medium from provider codex
+[2025-11-27 17:00:51] [debug] [model_registry.go:334] Registered new model gpt-5.1-codex-mini-high from provider codex
+[2025-11-27 17:00:51] [debug] [model_registry.go:334] Registered new model gpt-5.1-codex-max from provider codex
+[2025-11-27 17:00:51] [debug] [model_registry.go:334] Registered new model gpt-5.1-codex-max-low from provider codex
+[2025-11-27 17:00:51] [debug] [model_registry.go:334] Registered new model gpt-5.1-codex-max-medium from provider codex
+[2025-11-27 17:00:51] [debug] [model_registry.go:334] Registered new model gpt-5.1-codex-max-high from provider codex
+[2025-11-27 17:00:51] [debug] [model_registry.go:334] Registered new model gpt-5.1-codex-max-xhigh from provider codex
+[2025-11-27 17:00:51] [debug] [model_registry.go:166] Registered client codex-nvt191655320@gmail.com.json from provider codex with 29 models
+[2025-11-27 17:00:51] [debug] [credentials.go:25] -------------------------------------------------------------------
+[2025-11-27 17:00:51] [debug] [model_registry.go:319] Incremented count for model gemini-2.5-pro, now 4 clients
+[2025-11-27 17:00:51] [debug] [model_registry.go:319] Incremented count for model gemini-2.5-flash, now 4 clients
+[2025-11-27 17:00:51] [debug] [model_registry.go:319] Incremented count for model gemini-2.5-flash-lite, now 4 clients
+[2025-11-27 17:00:51] [debug] [model_registry.go:319] Incremented count for model gemini-3-pro-preview, now 4 clients
+[2025-11-27 17:00:51] [debug] [model_registry.go:166] Registered client gemini-nvt191655320@gmail.com-all.json::gen-lang-client-0494380206 from provider gemini-cli with 4 models
+[2025-11-27 17:00:51] [debug] [credentials.go:25] -------------------------------------------------------------------
+[2025-11-27 17:00:51] [debug] [model_registry.go:319] Incremented count for model gemini-2.5-pro, now 5 clients
+[2025-11-27 17:00:51] [debug] [model_registry.go:319] Incremented count for model gemini-2.5-flash, now 5 clients
+[2025-11-27 17:00:51] [debug] [model_registry.go:319] Incremented count for model gemini-2.5-flash-lite, now 5 clients
+[2025-11-27 17:00:51] [debug] [model_registry.go:319] Incremented count for model gemini-3-pro-preview, now 5 clients
+[2025-11-27 17:00:51] [debug] [model_registry.go:166] Registered client gemini-nvt191655320@gmail.com-all.json::fir-firebase-ai-app-340cb from provider gemini-cli with 4 models
+[2025-11-27 17:00:51] [debug] [credentials.go:25] -------------------------------------------------------------------
+[2025-11-27 17:00:51] [debug] [model_registry.go:319] Incremented count for model gemini-2.5-pro, now 6 clients
+[2025-11-27 17:00:51] [debug] [model_registry.go:319] Incremented count for model gemini-2.5-flash, now 6 clients
+[2025-11-27 17:00:51] [debug] [model_registry.go:319] Incremented count for model gemini-2.5-flash-lite, now 6 clients
+[2025-11-27 17:00:51] [debug] [model_registry.go:319] Incremented count for model gemini-3-pro-preview, now 6 clients
+[2025-11-27 17:00:51] [debug] [model_registry.go:166] Registered client gemini-nvt191655320@gmail.com-all.json::sample-firebase-ai-app-57f5f from provider gemini-cli with 4 models
+[2025-11-27 17:00:51] [debug] [credentials.go:25] -------------------------------------------------------------------
+[2025-11-27 17:00:51] [debug] [model_registry.go:319] Incremented count for model gemini-2.5-pro, now 7 clients
+[2025-11-27 17:00:51] [debug] [model_registry.go:319] Incremented count for model gemini-2.5-flash, now 7 clients
+[2025-11-27 17:00:51] [debug] [model_registry.go:319] Incremented count for model gemini-2.5-flash-lite, now 7 clients
+[2025-11-27 17:00:51] [debug] [model_registry.go:319] Incremented count for model gemini-3-pro-preview, now 7 clients
+[2025-11-27 17:00:51] [debug] [model_registry.go:166] Registered client gemini-nvt191655320@gmail.com-all.json::my-aws-name from provider gemini-cli with 4 models
+[2025-11-27 17:00:51] [debug] [credentials.go:25] -------------------------------------------------------------------
