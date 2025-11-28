@@ -1,0 +1,111 @@
+# =============================================================================
+# CLIProxyAPI Configuration: Amp CLI + AgentRouter
+# =============================================================================
+# Mục đích: Dùng Amp CLI với AgentRouter làm Claude backend
+# 
+# Cách dùng:
+#   1. Thay "sk-xxx" bằng API key từ https://agentrouter.org/console/token
+#   2. Chạy: ./cli-proxy-api --config config.amp-agentrouter.yaml
+#   3. Cấu hình Amp CLI:
+#      - Edit ~/.config/amp/settings.json: { "amp.url": "http://localhost:8317" }
+#      - Hoặc: export AMP_URL=http://localhost:8317 (nếu Amp hỗ trợ)
+#   4. Chạy: amp login && amp "Hello"
+# =============================================================================
+
+# Server port
+port: 8317
+
+# Authentication directory
+auth-dir: "~/.cli-proxy-api"
+
+# Amp integration - Required for management routes (login, threads, etc.)
+amp-upstream-url: "https://ampcode.com"
+amp-restrict-management-to-localhost: true
+
+# =============================================================================
+# Z.ai as Claude Backend (GLM-4.6)
+# =============================================================================
+# Z.ai cung cấp API tương thích Claude với GLM models
+# Lấy API key tại: https://z.ai/subscribe
+# =============================================================================
+claude-api-key:
+  - api-key: "your_zai_api_key"  # ⚠️ THAY BẰNG API KEY CỦA BẠN
+    base-url: "https://api.z.ai/api/anthropic"
+    models:
+      # Claude Opus → GLM-4.6
+      - name: "GLM-4.6"
+        alias: "claude-opus-4-5-20251101"
+      
+      # Claude Sonnet → GLM-4.6
+      - name: "GLM-4.6"
+        alias: "claude-sonnet-4-5-20250929"
+      - name: "GLM-4.6"
+        alias: "claude-sonnet-4-5-20250514"
+      - name: "GLM-4.6"
+        alias: "claude-sonnet-4-5"
+      
+      # Claude Haiku → GLM-4.5-Air
+      - name: "GLM-4.5-Air"
+        alias: "claude-haiku-4-5-20251001"
+      - name: "GLM-4.5-Air"
+        alias: "claude-haiku-4-5"
+      - name: "GLM-4.5-Air"
+        alias: "claude-3-5-haiku-20241022"
+
+# =============================================================================
+# OpenAI/Codex Models (GPT-5.1)
+# =============================================================================
+# Để dùng GPT-5.1, bạn cần đăng nhập Codex OAuth:
+#   ./cli-proxy-api --codex-login --config config.amp-agentrouter.yaml
+# Hoặc dùng API key:
+# codex-api-key:
+#   - api-key: "sk-xxx"
+#     base-url: "https://api.openai.com/v1"
+
+# =============================================================================
+# Gemini Models (gemini-3-pro-preview)
+# =============================================================================
+# Để dùng Gemini, bạn cần đăng nhập Google OAuth:
+#   ./cli-proxy-api --login --config config.amp-agentrouter.yaml
+# Hoặc dùng API key:
+# gemini-api-key:
+#   - api-key: "AIzaSy..."
+#     base-url: "https://generativelanguage.googleapis.com"
+
+# =============================================================================
+# Optional Settings
+# =============================================================================
+
+# API keys cho xác thực request (để trống nếu không cần)
+# api-keys:
+#   - "your-api-key"
+
+# Debug mode
+debug: false
+
+# Ghi log ra file
+logging-to-file: true
+
+# Thống kê usage
+usage-statistics-enabled: true
+
+# Retry settings
+request-retry: 3
+max-retry-interval: 30
+
+# Quota exceeded behavior
+quota-exceeded:
+  switch-project: true
+  switch-preview-model: true
+
+# WebSocket authentication (cho AI Studio connections)
+ws-auth: false
+
+# =============================================================================
+# Management API (optional)
+# =============================================================================
+# Bật nếu muốn quản lý config qua web UI
+# remote-management:
+#   allow-remote: false
+#   secret-key: "your-secret-key"
+#   disable-control-panel: false
