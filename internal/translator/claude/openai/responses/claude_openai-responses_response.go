@@ -14,7 +14,8 @@ import (
 
 type claudeToResponsesState struct {
 	Seq          int
-	ResponseID   string
+	ResponseID   string // OpenAI format: resp_xxx
+	ClaudeID     string // Original Claude ID: msg_xxx (for item IDs)
 	CreatedAt    int64
 	CurrentMsgID string
 	CurrentFCID  string
@@ -65,7 +66,14 @@ func ConvertClaudeResponseToOpenAIResponses(ctx context.Context, modelName strin
 	switch ev {
 	case "message_start":
 		if msg := root.Get("message"); msg.Exists() {
-			st.ResponseID = msg.Get("id").String()
+			// Store original Claude ID for item IDs
+			st.ClaudeID = msg.Get("id").String()
+			// Convert Claude msg_ prefix to OpenAI resp_ prefix for response ID
+			if strings.HasPrefix(st.ClaudeID, "msg_") {
+				st.ResponseID = "resp_" + st.ClaudeID[4:]
+			} else {
+				st.ResponseID = "resp_" + st.ClaudeID
+			}
 			st.CreatedAt = time.Now().Unix()
 			// Reset per-message aggregation state
 			st.TextBuf.Reset()
@@ -94,17 +102,20 @@ func ConvertClaudeResponseToOpenAIResponses(ctx context.Context, modelName strin
 					st.UsageSeen = true
 				}
 			}
-			// response.created
-			created := `{"type":"response.created","sequence_number":0,"response":{"id":"","object":"response","created_at":0,"status":"in_progress","background":false,"error":null,"instructions":""}}`
+			// response.created - use original model name from request
+			// IMPORTANT: output:[] is required even when empty, or Amp CLI will close connection
+			created := `{"type":"response.created","sequence_number":0,"response":{"id":"","object":"response","created_at":0,"status":"in_progress","background":false,"error":null,"incomplete_details":null,"instructions":null,"metadata":{},"model":"","output":[],"parallel_tool_calls":true,"temperature":1,"tool_choice":"auto","top_p":1,"max_output_tokens":null,"previous_response_id":null,"reasoning":null,"service_tier":"default","store":true,"text":{"format":{"type":"text"}},"truncation":"disabled","usage":null}}`
 			created, _ = sjson.Set(created, "sequence_number", nextSeq())
 			created, _ = sjson.Set(created, "response.id", st.ResponseID)
 			created, _ = sjson.Set(created, "response.created_at", st.CreatedAt)
+			created, _ = sjson.Set(created, "response.model", modelName)
 			out = append(out, emitEvent("response.created", created))
 			// response.in_progress
-			inprog := `{"type":"response.in_progress","sequence_number":0,"response":{"id":"","object":"response","created_at":0,"status":"in_progress"}}`
+			inprog := `{"type":"response.in_progress","sequence_number":0,"response":{"id":"","object":"response","created_at":0,"status":"in_progress","model":"","output":[]}}`
 			inprog, _ = sjson.Set(inprog, "sequence_number", nextSeq())
 			inprog, _ = sjson.Set(inprog, "response.id", st.ResponseID)
 			inprog, _ = sjson.Set(inprog, "response.created_at", st.CreatedAt)
+			inprog, _ = sjson.Set(inprog, "response.model", modelName)
 			out = append(out, emitEvent("response.in_progress", inprog))
 		}
 	case "content_block_start":
@@ -117,15 +128,22 @@ func ConvertClaudeResponseToOpenAIResponses(ctx context.Context, modelName strin
 		if typ == "text" {
 			// open message item + content part
 			st.InTextBlock = true
-			st.CurrentMsgID = fmt.Sprintf("msg_%s_0", st.ResponseID)
+			// Use original Claude ID for item IDs (already has msg_ prefix)
+			if strings.HasPrefix(st.ClaudeID, "msg_") {
+				st.CurrentMsgID = fmt.Sprintf("%s_0", st.ClaudeID)
+			} else {
+				st.CurrentMsgID = fmt.Sprintf("msg_%s_0", st.ClaudeID)
+			}
 			item := `{"type":"response.output_item.added","sequence_number":0,"output_index":0,"item":{"id":"","type":"message","status":"in_progress","content":[],"role":"assistant"}}`
 			item, _ = sjson.Set(item, "sequence_number", nextSeq())
+			item, _ = sjson.Set(item, "output_index", idx)
 			item, _ = sjson.Set(item, "item.id", st.CurrentMsgID)
 			out = append(out, emitEvent("response.output_item.added", item))
 
 			part := `{"type":"response.content_part.added","sequence_number":0,"item_id":"","output_index":0,"content_index":0,"part":{"type":"output_text","annotations":[],"logprobs":[],"text":""}}`
 			part, _ = sjson.Set(part, "sequence_number", nextSeq())
 			part, _ = sjson.Set(part, "item_id", st.CurrentMsgID)
+			part, _ = sjson.Set(part, "output_index", idx)
 			out = append(out, emitEvent("response.content_part.added", part))
 		} else if typ == "tool_use" {
 			st.InFuncBlock = true
@@ -149,7 +167,7 @@ func ConvertClaudeResponseToOpenAIResponses(ctx context.Context, modelName strin
 			st.ReasoningActive = true
 			st.ReasoningIndex = idx
 			st.ReasoningBuf.Reset()
-			st.ReasoningItemID = fmt.Sprintf("rs_%s_%d", st.ResponseID, idx)
+			st.ReasoningItemID = fmt.Sprintf("rs_%s_%d", st.ClaudeID, idx)
 			item := `{"type":"response.output_item.added","sequence_number":0,"output_index":0,"item":{"id":"","type":"reasoning","status":"in_progress","summary":[]}}`
 			item, _ = sjson.Set(item, "sequence_number", nextSeq())
 			item, _ = sjson.Set(item, "output_index", idx)
@@ -170,10 +188,12 @@ func ConvertClaudeResponseToOpenAIResponses(ctx context.Context, modelName strin
 		}
 		dt := d.Get("type").String()
 		if dt == "text_delta" {
+			idx := int(root.Get("index").Int())
 			if t := d.Get("text"); t.Exists() {
 				msg := `{"type":"response.output_text.delta","sequence_number":0,"item_id":"","output_index":0,"content_index":0,"delta":"","logprobs":[]}`
 				msg, _ = sjson.Set(msg, "sequence_number", nextSeq())
 				msg, _ = sjson.Set(msg, "item_id", st.CurrentMsgID)
+				msg, _ = sjson.Set(msg, "output_index", idx)
 				msg, _ = sjson.Set(msg, "delta", t.String())
 				out = append(out, emitEvent("response.output_text.delta", msg))
 				// aggregate text for response.output
@@ -182,16 +202,20 @@ func ConvertClaudeResponseToOpenAIResponses(ctx context.Context, modelName strin
 		} else if dt == "input_json_delta" {
 			idx := int(root.Get("index").Int())
 			if pj := d.Get("partial_json"); pj.Exists() {
+				pjStr := pj.String()
 				if st.FuncArgsBuf[idx] == nil {
 					st.FuncArgsBuf[idx] = &strings.Builder{}
 				}
-				st.FuncArgsBuf[idx].WriteString(pj.String())
-				msg := `{"type":"response.function_call_arguments.delta","sequence_number":0,"item_id":"","output_index":0,"delta":""}`
-				msg, _ = sjson.Set(msg, "sequence_number", nextSeq())
-				msg, _ = sjson.Set(msg, "item_id", fmt.Sprintf("fc_%s", st.CurrentFCID))
-				msg, _ = sjson.Set(msg, "output_index", idx)
-				msg, _ = sjson.Set(msg, "delta", pj.String())
-				out = append(out, emitEvent("response.function_call_arguments.delta", msg))
+				st.FuncArgsBuf[idx].WriteString(pjStr)
+				// Skip empty deltas - only emit when there's actual content
+				if pjStr != "" {
+					msg := `{"type":"response.function_call_arguments.delta","sequence_number":0,"item_id":"","output_index":0,"delta":""}`
+					msg, _ = sjson.Set(msg, "sequence_number", nextSeq())
+					msg, _ = sjson.Set(msg, "item_id", fmt.Sprintf("fc_%s", st.CurrentFCID))
+					msg, _ = sjson.Set(msg, "output_index", idx)
+					msg, _ = sjson.Set(msg, "delta", pjStr)
+					out = append(out, emitEvent("response.function_call_arguments.delta", msg))
+				}
 			}
 		} else if dt == "thinking_delta" {
 			if st.ReasoningActive {
@@ -212,14 +236,20 @@ func ConvertClaudeResponseToOpenAIResponses(ctx context.Context, modelName strin
 			done := `{"type":"response.output_text.done","sequence_number":0,"item_id":"","output_index":0,"content_index":0,"text":"","logprobs":[]}`
 			done, _ = sjson.Set(done, "sequence_number", nextSeq())
 			done, _ = sjson.Set(done, "item_id", st.CurrentMsgID)
+			done, _ = sjson.Set(done, "output_index", idx)
+			done, _ = sjson.Set(done, "text", st.TextBuf.String())
 			out = append(out, emitEvent("response.output_text.done", done))
 			partDone := `{"type":"response.content_part.done","sequence_number":0,"item_id":"","output_index":0,"content_index":0,"part":{"type":"output_text","annotations":[],"logprobs":[],"text":""}}`
 			partDone, _ = sjson.Set(partDone, "sequence_number", nextSeq())
 			partDone, _ = sjson.Set(partDone, "item_id", st.CurrentMsgID)
+			partDone, _ = sjson.Set(partDone, "output_index", idx)
+			partDone, _ = sjson.Set(partDone, "part.text", st.TextBuf.String())
 			out = append(out, emitEvent("response.content_part.done", partDone))
 			final := `{"type":"response.output_item.done","sequence_number":0,"output_index":0,"item":{"id":"","type":"message","status":"completed","content":[{"type":"output_text","text":""}],"role":"assistant"}}`
 			final, _ = sjson.Set(final, "sequence_number", nextSeq())
+			final, _ = sjson.Set(final, "output_index", idx)
 			final, _ = sjson.Set(final, "item.id", st.CurrentMsgID)
+			final, _ = sjson.Set(final, "item.content.0.text", st.TextBuf.String())
 			out = append(out, emitEvent("response.output_item.done", final))
 			st.InTextBlock = false
 		} else if st.InFuncBlock {
@@ -229,11 +259,14 @@ func ConvertClaudeResponseToOpenAIResponses(ctx context.Context, modelName strin
 					args = buf.String()
 				}
 			}
-			fcDone := `{"type":"response.function_call_arguments.done","sequence_number":0,"item_id":"","output_index":0,"arguments":""}`
+			// Get function name from stored metadata
+			funcName := st.FuncNames[idx]
+			fcDone := `{"type":"response.function_call_arguments.done","sequence_number":0,"item_id":"","output_index":0,"arguments":"","name":""}`
 			fcDone, _ = sjson.Set(fcDone, "sequence_number", nextSeq())
 			fcDone, _ = sjson.Set(fcDone, "item_id", fmt.Sprintf("fc_%s", st.CurrentFCID))
 			fcDone, _ = sjson.Set(fcDone, "output_index", idx)
 			fcDone, _ = sjson.Set(fcDone, "arguments", args)
+			fcDone, _ = sjson.Set(fcDone, "name", funcName)
 			out = append(out, emitEvent("response.function_call_arguments.done", fcDone))
 			itemDone := `{"type":"response.output_item.done","sequence_number":0,"output_index":0,"item":{"id":"","type":"function_call","status":"completed","arguments":"","call_id":"","name":""}}`
 			itemDone, _ = sjson.Set(itemDone, "sequence_number", nextSeq())
@@ -241,6 +274,7 @@ func ConvertClaudeResponseToOpenAIResponses(ctx context.Context, modelName strin
 			itemDone, _ = sjson.Set(itemDone, "item.id", fmt.Sprintf("fc_%s", st.CurrentFCID))
 			itemDone, _ = sjson.Set(itemDone, "item.arguments", args)
 			itemDone, _ = sjson.Set(itemDone, "item.call_id", st.CurrentFCID)
+			itemDone, _ = sjson.Set(itemDone, "item.name", funcName)
 			out = append(out, emitEvent("response.output_item.done", itemDone))
 			st.InFuncBlock = false
 		} else if st.ReasoningActive {
@@ -489,7 +523,13 @@ func ConvertClaudeResponseToOpenAIResponsesNonStream(_ context.Context, _ string
 		switch ev {
 		case "message_start":
 			if msg := root.Get("message"); msg.Exists() {
-				responseID = msg.Get("id").String()
+				// Convert Claude msg_ prefix to OpenAI resp_ prefix
+				claudeID := msg.Get("id").String()
+				if strings.HasPrefix(claudeID, "msg_") {
+					responseID = "resp_" + claudeID[4:]
+				} else {
+					responseID = "resp_" + claudeID
+				}
 				createdAt = time.Now().Unix()
 				if usage := msg.Get("usage"); usage.Exists() {
 					inputTokens = usage.Get("input_tokens").Int()
@@ -505,7 +545,12 @@ func ConvertClaudeResponseToOpenAIResponsesNonStream(_ context.Context, _ string
 			typ := cb.Get("type").String()
 			switch typ {
 			case "text":
-				currentMsgID = "msg_" + responseID + "_0"
+				// Don't add msg_ prefix if responseID already has it
+				if strings.HasPrefix(responseID, "msg_") {
+					currentMsgID = responseID + "_0"
+				} else {
+					currentMsgID = "msg_" + responseID + "_0"
+				}
 			case "tool_use":
 				currentFCID = cb.Get("id").String()
 				name := cb.Get("name").String()

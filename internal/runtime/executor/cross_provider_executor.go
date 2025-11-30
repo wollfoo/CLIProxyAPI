@@ -309,6 +309,12 @@ func (e *CrossProviderExecutor) executeStreamWithClaude(ctx context.Context, aut
 		var param any
 
 		for scanner.Scan() {
+			// Check if context was cancelled (client disconnected)
+			if ctx.Err() != nil {
+				log.Debugf("cross-provider executor: context cancelled, stopping stream")
+				break
+			}
+
 			line := scanner.Bytes()
 			appendAPIResponseChunk(ctx, e.cfg, line)
 
@@ -319,15 +325,33 @@ func (e *CrossProviderExecutor) executeStreamWithClaude(ctx context.Context, aut
 
 			// Translate each chunk from Claude to OpenAI format
 			chunks := sdktranslator.TranslateStream(ctx, to, from, req.Model, bytes.Clone(opts.OriginalRequest), body, bytes.Clone(line), &param)
+			if len(chunks) > 0 {
+				preview := string(line)
+				if len(preview) > 100 {
+					preview = preview[:100] + "..."
+				}
+				log.Debugf("cross-provider executor: translated %d chunks from: %s", len(chunks), preview)
+			}
 			for i := range chunks {
+				// Log the actual translated event being sent
+				if len(chunks[i]) > 0 {
+					eventPreview := chunks[i]
+					if len(eventPreview) > 150 {
+						eventPreview = eventPreview[:150] + "..."
+					}
+					log.Debugf("cross-provider executor: sending event: %s", eventPreview)
+				}
 				out <- cliproxyexecutor.StreamChunk{Payload: []byte(chunks[i])}
 			}
 		}
 
 		if errScan := scanner.Err(); errScan != nil {
+			log.Errorf("cross-provider executor: scanner error: %v", errScan)
 			recordAPIResponseError(ctx, e.cfg, errScan)
 			reporter.publishFailure(ctx)
 			out <- cliproxyexecutor.StreamChunk{Err: errScan}
+		} else {
+			log.Debugf("cross-provider executor: stream completed normally")
 		}
 
 		// Ensure usage is published even if no usage chunk was received
