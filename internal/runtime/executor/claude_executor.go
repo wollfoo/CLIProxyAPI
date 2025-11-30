@@ -58,6 +58,7 @@ func (e *ClaudeExecutor) Execute(ctx context.Context, auth *cliproxyauth.Auth, r
 	if modelOverride := e.resolveUpstreamModel(req.Model, auth); modelOverride != "" {
 		body, _ = sjson.SetBytes(body, "model", modelOverride)
 		modelForUpstream = modelOverride
+		log.Debugf("claude executor: model alias %s → %s", req.Model, modelOverride)
 	}
 	// Inject thinking config based on model suffix for thinking variants
 	body = e.injectThinkingConfig(req.Model, body)
@@ -509,14 +510,17 @@ func (e *ClaudeExecutor) resolveUpstreamModel(alias string, auth *cliproxyauth.A
 	}
 	entry := e.resolveClaudeConfig(auth)
 	if entry == nil {
+		log.Debugf("claude executor: no config entry found for auth %s", auth.ID)
 		return ""
 	}
+	log.Debugf("claude executor: resolving alias %s with %d model entries", alias, len(entry.Models))
 	for i := range entry.Models {
 		model := entry.Models[i]
 		name := strings.TrimSpace(model.Name)
 		modelAlias := strings.TrimSpace(model.Alias)
 		if modelAlias != "" {
 			if strings.EqualFold(modelAlias, alias) {
+				log.Debugf("claude executor: found alias match %s → %s", modelAlias, name)
 				if name != "" {
 					return name
 				}
@@ -528,6 +532,7 @@ func (e *ClaudeExecutor) resolveUpstreamModel(alias string, auth *cliproxyauth.A
 			return name
 		}
 	}
+	log.Debugf("claude executor: no alias found for %s", alias)
 	return ""
 }
 

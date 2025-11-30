@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"bytes"
 	"context"
+	"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
@@ -15,6 +16,7 @@ import (
 	cliproxyexecutor "github.com/router-for-me/CLIProxyAPI/v6/sdk/cliproxy/executor"
 	sdktranslator "github.com/router-for-me/CLIProxyAPI/v6/sdk/translator"
 	log "github.com/sirupsen/logrus"
+	"github.com/tidwall/gjson"
 	"github.com/tidwall/sjson"
 )
 
@@ -114,6 +116,9 @@ func (e *CrossProviderExecutor) executeWithClaude(ctx context.Context, auth *cli
 		body, _ = sjson.SetBytes(body, "model", modelOverride)
 		log.Debugf("cross-provider executor: model alias %s → %s", req.Model, modelOverride)
 	}
+
+	// [CLAUDE-FIX] Extract system messages from messages array to top-level system parameter
+	body = extractSystemToTopLevel(body)
 
 	// [AZURE-FIX] Sanitize tool names for Azure Foundry compatibility
 	body = sanitizeToolNames(body)
@@ -221,6 +226,9 @@ func (e *CrossProviderExecutor) executeStreamWithClaude(ctx context.Context, aut
 
 	// Enable streaming
 	body, _ = sjson.SetBytes(body, "stream", true)
+
+	// [CLAUDE-FIX] Extract system messages from messages array to top-level system parameter
+	body = extractSystemToTopLevel(body)
 
 	// [AZURE-FIX] Sanitize tool names
 	body = sanitizeToolNames(body)
@@ -343,6 +351,9 @@ func (e *CrossProviderExecutor) countTokensWithClaude(ctx context.Context, auth 
 		modelForCounting = modelOverride
 	}
 
+	// [CLAUDE-FIX] Extract system messages from messages array to top-level system parameter
+	body = extractSystemToTopLevel(body)
+
 	// Use Claude tokenizer
 	enc, err := tokenizerForModel(modelForCounting)
 	if err != nil {
@@ -363,49 +374,17 @@ func (e *CrossProviderExecutor) countTokensWithClaude(ctx context.Context, auth 
 // Helper Functions
 // =============================================================================
 
-// resolveUpstreamModel resolves model alias to upstream model name from codex-api-key config.
+// resolveUpstreamModel resolves model alias to upstream model name from auth attributes.
+// The model_name is stored in auth attributes when the cross-provider auth is created.
 func (e *CrossProviderExecutor) resolveUpstreamModel(alias string, auth *cliproxyauth.Auth) string {
-	if alias == "" || auth == nil || e.cfg == nil {
+	if alias == "" || auth == nil || auth.Attributes == nil {
 		return ""
 	}
 
-	// Get provider key from auth attributes
-	var providerKey string
-	if auth.Attributes != nil {
-		providerKey = strings.TrimSpace(auth.Attributes["provider_key"])
-	}
-	if providerKey == "" {
-		return ""
-	}
-
-	// Find matching codex-api-key config
-	for i := range e.cfg.CodexKey {
-		ck := &e.cfg.CodexKey[i]
-
-		// Check if this is the matching config (by base URL or provider key)
-		if auth.Attributes != nil {
-			if baseURL := strings.TrimSpace(auth.Attributes["base_url"]); baseURL != "" {
-				if strings.TrimSpace(ck.BaseURL) != baseURL {
-					continue
-				}
-			}
-		}
-
-		// Check if provider type matches
-		if !strings.EqualFold(ck.ProviderType, e.providerType) {
-			continue
-		}
-
-		// Search for alias in models
-		for j := range ck.Models {
-			model := &ck.Models[j]
-			if strings.EqualFold(strings.TrimSpace(model.Alias), alias) {
-				if model.Name != "" {
-					return model.Name
-				}
-				return alias
-			}
-		}
+	// Get model_name directly from auth attributes (set during auth synthesis)
+	modelName := strings.TrimSpace(auth.Attributes["model_name"])
+	if modelName != "" {
+		return modelName
 	}
 
 	return ""
@@ -433,4 +412,59 @@ func applyCrossProviderClaudeHeaders(r *http.Request, auth *cliproxyauth.Auth, a
 		attrs = auth.Attributes
 	}
 	util.ApplyCustomHeadersFromAttrs(r, attrs)
+}
+
+// extractSystemToTopLevel extracts system messages from messages array and moves them to top-level system parameter.
+// This is required for Claude API which expects system to be a top-level parameter, not a message role.
+func extractSystemToTopLevel(body []byte) []byte {
+	messages := gjson.GetBytes(body, "messages")
+	if !messages.Exists() || !messages.IsArray() {
+		return body
+	}
+
+	var systemParts []map[string]interface{}
+	var filteredMessages []json.RawMessage
+
+	messages.ForEach(func(_, msg gjson.Result) bool {
+		role := msg.Get("role").String()
+		if role == "system" {
+			// Extract system message content
+			content := msg.Get("content")
+			if content.Type == gjson.String && content.String() != "" {
+				systemParts = append(systemParts, map[string]interface{}{
+					"type": "text",
+					"text": content.String(),
+				})
+			} else if content.IsArray() {
+				content.ForEach(func(_, part gjson.Result) bool {
+					if part.Get("type").String() == "text" {
+						systemParts = append(systemParts, map[string]interface{}{
+							"type": "text",
+							"text": part.Get("text").String(),
+						})
+					}
+					return true
+				})
+			}
+		} else {
+			// Keep non-system messages
+			filteredMessages = append(filteredMessages, json.RawMessage(msg.Raw))
+		}
+		return true
+	})
+
+	// If we found system messages, update the body
+	if len(systemParts) > 0 {
+		// Set top-level system parameter
+		systemJSON, _ := json.Marshal(systemParts)
+		body, _ = sjson.SetRawBytes(body, "system", systemJSON)
+
+		// Replace messages with filtered messages (without system)
+		messagesJSON, _ := json.Marshal(filteredMessages)
+		body, _ = sjson.SetRawBytes(body, "messages", messagesJSON)
+
+		log.Debugf("cross-provider executor: extracted %d system parts to top-level", len(systemParts))
+	}
+
+	return body
 }

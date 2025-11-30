@@ -5,6 +5,7 @@ import (
 	"crypto/rand"
 	"crypto/sha256"
 	"encoding/hex"
+	"encoding/json"
 	"fmt"
 	"math/big"
 	"strings"
@@ -91,51 +92,50 @@ func ConvertOpenAIResponsesRequestToClaude(modelName string, inputRawJSON []byte
 	// Stream
 	out, _ = sjson.Set(out, "stream", stream)
 
-	// instructions -> as a leading message (use role user for Claude API compatibility)
-	instructionsText := ""
-	extractedFromSystem := false
-	if instr := root.Get("instructions"); instr.Exists() && instr.Type == gjson.String {
-		instructionsText = instr.String()
-		if instructionsText != "" {
-			sysMsg := `{"role":"user","content":""}`
-			sysMsg, _ = sjson.Set(sysMsg, "content", instructionsText)
-			out, _ = sjson.SetRaw(out, "messages.-1", sysMsg)
-		}
-	}
+	// Collect all system content for Claude's top-level system parameter
+	var systemParts []map[string]interface{}
 
-	if instructionsText == "" {
-		if input := root.Get("input"); input.Exists() && input.IsArray() {
-			input.ForEach(func(_, item gjson.Result) bool {
-				if strings.EqualFold(item.Get("role").String(), "system") {
-					var builder strings.Builder
-					if parts := item.Get("content"); parts.Exists() && parts.IsArray() {
-						parts.ForEach(func(_, part gjson.Result) bool {
-							text := part.Get("text").String()
-							if builder.Len() > 0 && text != "" {
-								builder.WriteByte('\n')
-							}
-							builder.WriteString(text)
-							return true
-						})
-					}
-					instructionsText = builder.String()
-					if instructionsText != "" {
-						sysMsg := `{"role":"user","content":""}`
-						sysMsg, _ = sjson.Set(sysMsg, "content", instructionsText)
-						out, _ = sjson.SetRaw(out, "messages.-1", sysMsg)
-						extractedFromSystem = true
-					}
-				}
-				return instructionsText == ""
+	// Extract from instructions field first
+	if instr := root.Get("instructions"); instr.Exists() && instr.Type == gjson.String {
+		if text := instr.String(); text != "" {
+			systemParts = append(systemParts, map[string]interface{}{
+				"type": "text",
+				"text": text,
 			})
 		}
 	}
 
-	// input array processing
+	// Extract from input array system messages
 	if input := root.Get("input"); input.Exists() && input.IsArray() {
 		input.ForEach(func(_, item gjson.Result) bool {
-			if extractedFromSystem && strings.EqualFold(item.Get("role").String(), "system") {
-				return true
+			if strings.EqualFold(item.Get("role").String(), "system") {
+				if parts := item.Get("content"); parts.Exists() && parts.IsArray() {
+					parts.ForEach(func(_, part gjson.Result) bool {
+						if text := part.Get("text").String(); text != "" {
+							systemParts = append(systemParts, map[string]interface{}{
+								"type": "text",
+								"text": text,
+							})
+						}
+						return true
+					})
+				}
+			}
+			return true
+		})
+	}
+
+	// Set top-level system parameter (Claude API format)
+	if len(systemParts) > 0 {
+		systemJSON, _ := json.Marshal(systemParts)
+		out, _ = sjson.SetRaw(out, "system", string(systemJSON))
+	}
+
+	// input array processing - skip all system messages (already extracted to top-level)
+	if input := root.Get("input"); input.Exists() && input.IsArray() {
+		input.ForEach(func(_, item gjson.Result) bool {
+			if strings.EqualFold(item.Get("role").String(), "system") {
+				return true // Skip all system messages
 			}
 			typ := item.Get("type").String()
 			if typ == "" && item.Get("role").String() != "" {
@@ -206,10 +206,11 @@ func ConvertOpenAIResponsesRequestToClaude(modelName string, inputRawJSON []byte
 				}
 
 				// Fallback to given role if content types not decisive
+				// Never use "system" role - Claude API requires system at top-level
 				if role == "" {
 					r := item.Get("role").String()
 					switch r {
-					case "user", "assistant", "system":
+					case "user", "assistant":
 						role = r
 					default:
 						role = "user"
@@ -230,7 +231,7 @@ func ConvertOpenAIResponsesRequestToClaude(modelName string, inputRawJSON []byte
 						}
 					}
 					out, _ = sjson.SetRaw(out, "messages.-1", msg)
-				} else if textAggregate.Len() > 0 || role == "system" {
+				} else if textAggregate.Len() > 0 {
 					msg := `{"role":"","content":""}`
 					msg, _ = sjson.Set(msg, "role", role)
 					msg, _ = sjson.Set(msg, "content", textAggregate.String())
