@@ -128,27 +128,46 @@ claude-api-key:
       anthropic-version: "2023-06-01"
       x-api-key: "YOUR_AZURE_API_KEY"
     
-    # Model Mappings: Amp CLI Model Name → Azure Model Name
+    # Model Mappings: TẤT CẢ Claude models → claude-opus-4-5
+    # Điều này đảm bảo mọi subagent đều dùng Opus 4.5
     models:
-      # Opus Models
+      # =====================================================
+      # OPUS MODELS (Smart mode - giữ nguyên)
+      # =====================================================
       - name: "claude-opus-4-5"
         alias: "claude-opus-4-5-20251101"
       - name: "claude-opus-4-5"
         alias: "claude-opus-4-5"
-      - name: "claude-opus-4-1"
+      - name: "claude-opus-4-5"
         alias: "claude-opus-4-1"
       
-      # Sonnet Models
-      - name: "claude-sonnet-4-5"
+      # =====================================================
+      # SONNET → OPUS (Librarian subagent dùng Sonnet)
+      # =====================================================
+      - name: "claude-opus-4-5"
         alias: "claude-sonnet-4-5-20250929"
-      - name: "claude-sonnet-4-5"
+      - name: "claude-opus-4-5"
         alias: "claude-sonnet-4-5"
+      - name: "claude-opus-4-5"
+        alias: "claude-sonnet-4"
       
-      # Haiku Models
-      - name: "claude-haiku-4-5"
+      # =====================================================
+      # HAIKU 4.5 → OPUS (Search subagent dùng Haiku 4.5)
+      # =====================================================
+      - name: "claude-opus-4-5"
         alias: "claude-haiku-4-5-20251001"
-      - name: "claude-haiku-4-5"
+      - name: "claude-opus-4-5"
         alias: "claude-haiku-4-5"
+      
+      # =====================================================
+      # HAIKU 3.5 → OPUS (Titling system dùng Haiku 3.5)
+      # =====================================================
+      - name: "claude-opus-4-5"
+        alias: "claude-3-5-haiku-20241022"
+      - name: "claude-opus-4-5"
+        alias: "claude-3-5-haiku"
+      - name: "claude-opus-4-5"
+        alias: "claude-haiku-3-5"
 
 # ============================================================================
 # HƯỚNG DẪN SỬ DỤNG

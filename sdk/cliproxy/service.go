@@ -353,6 +353,12 @@ func (s *Service) ensureExecutorsForAuth(a *coreauth.Auth) {
 		s.coreManager.RegisterExecutor(executor.NewIFlowExecutor(s.cfg))
 	default:
 		providerKey := strings.ToLower(strings.TrimSpace(a.Provider))
+		// Handle cross-provider routing (e.g., cross-provider-claude)
+		if strings.HasPrefix(providerKey, "cross-provider-") {
+			targetProvider := strings.TrimPrefix(providerKey, "cross-provider-")
+			s.coreManager.RegisterExecutor(executor.NewCrossProviderExecutor(s.cfg, targetProvider))
+			return
+		}
 		if providerKey == "" {
 			providerKey = "openai-compatibility"
 		}
