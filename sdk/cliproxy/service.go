@@ -663,6 +663,34 @@ func (s *Service) registerModelsForAuth(a *coreauth.Auth) {
 	case "iflow":
 		models = registry.GetIFlowModels()
 	default:
+		// Handle cross-provider routing (e.g., cross-provider-claude)
+		if strings.HasPrefix(provider, "cross-provider-") {
+			// Get the model alias from auth attributes
+			if a.Attributes != nil {
+				alias := strings.TrimSpace(a.Attributes["model_alias"])
+				modelName := strings.TrimSpace(a.Attributes["model_name"])
+				if alias != "" {
+					displayName := alias
+					if modelName != "" {
+						displayName = fmt.Sprintf("%s → %s", alias, modelName)
+					}
+					models = []*ModelInfo{
+						{
+							ID:          alias,
+							Object:      "model",
+							Created:     time.Now().Unix(),
+							OwnedBy:     provider,
+							Type:        provider,
+							DisplayName: displayName,
+						},
+					}
+				}
+			}
+			if len(models) > 0 {
+				GlobalModelRegistry().RegisterClient(a.ID, provider, models)
+			}
+			return
+		}
 		// Handle OpenAI-compatibility providers by name using config
 		if s.cfg != nil {
 			providerKey := provider

@@ -28,9 +28,31 @@ auth-dir: "~/.cli-proxy-api"
 # Enable debug logging for troubleshooting
 debug: true
 
+# Log to file (tùy chọn)
+logging-to-file: false
+
+
 # Amp upstream URL
 amp-upstream-url: "https://ampcode.com"
 amp-restrict-management-to-localhost: true
+
+# Usage statistics
+usage-statistics-enabled: false
+
+# Proxy URL (nếu cần proxy ra internet)
+# proxy-url: "socks5://user:pass@192.168.1.1:1080/"
+
+# Retry configuration
+request-retry: 3
+max-retry-interval: 30
+
+# Quota behavior - tự động chuyển khi hết quota
+quota-exceeded:
+  switch-project: true
+  switch-preview-model: true
+
+# WebSocket Authentication
+ws-auth: false
 
 # ============================================================================
 # CROSS-PROVIDER ROUTING: Oracle GPT-5 → Azure Claude
