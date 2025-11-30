@@ -891,6 +891,48 @@ func (w *Watcher) SnapshotCoreAuths() []*coreauth.Auth {
 			if key == "" {
 				continue
 			}
+
+			// Check if this is a cross-provider routing config
+			providerType := strings.ToLower(strings.TrimSpace(ck.ProviderType))
+			if providerType != "" {
+				// Cross-provider routing: codex-api-key with provider-type
+				// Example: gpt-5 → claude-opus-4-5 via Azure Claude
+				for j := range ck.Models {
+					model := &ck.Models[j]
+					alias := strings.TrimSpace(model.Alias)
+					if alias == "" {
+						continue
+					}
+					idKind := fmt.Sprintf("cross-provider:%s:%s", providerType, alias)
+					id, token := idGen.next(idKind, key, ck.BaseURL, alias)
+					attrs := map[string]string{
+						"source":        fmt.Sprintf("config:codex-cross-provider[%s]", token),
+						"api_key":       key,
+						"provider_type": providerType,
+						"model_alias":   alias,
+						"model_name":    strings.TrimSpace(model.Name),
+					}
+					if ck.BaseURL != "" {
+						attrs["base_url"] = ck.BaseURL
+					}
+					addConfigHeadersToAttrs(ck.Headers, attrs)
+					proxyURL := strings.TrimSpace(ck.ProxyURL)
+					a := &coreauth.Auth{
+						ID:         id,
+						Provider:   "cross-provider-" + providerType,
+						Label:      fmt.Sprintf("cross-provider-%s:%s", providerType, alias),
+						Status:     coreauth.StatusActive,
+						ProxyURL:   proxyURL,
+						Attributes: attrs,
+						CreatedAt:  now,
+						UpdatedAt:  now,
+					}
+					out = append(out, a)
+				}
+				continue // Skip normal codex auth creation for cross-provider configs
+			}
+
+			// Normal codex auth
 			id, token := idGen.next("codex:apikey", key, ck.BaseURL)
 			attrs := map[string]string{
 				"source":  fmt.Sprintf("config:codex[%s]", token),

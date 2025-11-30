@@ -72,6 +72,16 @@ func (fh *FallbackHandler) WrapHandler(handler gin.HandlerFunc) gin.HandlerFunc 
 			providers = []string{"claude"}
 		}
 
+		// [CROSS-PROVIDER] Check: nếu model match với codex-api-key cross-provider aliases
+		// Ví dụ: gpt-5 → claude-opus-4-5 (provider-type: "claude")
+		if len(providers) == 0 {
+			if codexKey, codexModel := fh.hasCodexCrossProviderAlias(modelName); codexKey != nil && codexModel != nil {
+				log.Infof("amp fallback: model %s matched codex cross-provider alias, routing to %s via %s",
+					modelName, codexModel.Name, codexKey.ProviderType)
+				providers = []string{"cross-provider-" + codexKey.ProviderType}
+			}
+		}
+
 		if len(providers) == 0 {
 			// No providers configured - check if we have a proxy for fallback
 			proxy := fh.getProxy()
@@ -190,5 +200,54 @@ func (fh *FallbackHandler) hasClaudeAPIKeyAlias(modelName string) bool {
 	}
 
 	return false
+}
+
+// hasCodexCrossProviderAlias checks if the model name matches any alias in codex-api-key
+// with provider-type set (cross-provider routing).
+// Returns the matching CodexKey and CodexModel if found, or nil if not.
+// Example: gpt-5 → claude-opus-4-5 (via codex-api-key with provider-type: "claude")
+func (fh *FallbackHandler) hasCodexCrossProviderAlias(modelName string) (*config.CodexKey, *config.CodexModel) {
+	if fh.getConfig == nil {
+		return nil, nil
+	}
+	cfg := fh.getConfig()
+	if cfg == nil || len(cfg.CodexKey) == 0 {
+		return nil, nil
+	}
+
+	modelLower := strings.ToLower(strings.TrimSpace(modelName))
+	if modelLower == "" {
+		return nil, nil
+	}
+
+	// Check each codex-api-key entry
+	for i := range cfg.CodexKey {
+		ck := &cfg.CodexKey[i]
+
+		// Only check entries with provider-type set (cross-provider routing)
+		providerType := strings.ToLower(strings.TrimSpace(ck.ProviderType))
+		if providerType == "" {
+			continue
+		}
+
+		// Check models aliases
+		for j := range ck.Models {
+			model := &ck.Models[j]
+			alias := strings.ToLower(strings.TrimSpace(model.Alias))
+			if alias != "" && alias == modelLower {
+				log.Infof("amp fallback: model %s matched codex-api-key cross-provider alias (provider-type: %s, target: %s)",
+					modelName, providerType, model.Name)
+				return ck, model
+			}
+		}
+	}
+
+	return nil, nil
+}
+
+// GetCodexCrossProviderConfig returns cross-provider routing config for a model.
+// This is used by the handler to set up cross-provider executor.
+func (fh *FallbackHandler) GetCodexCrossProviderConfig(modelName string) (*config.CodexKey, *config.CodexModel) {
+	return fh.hasCodexCrossProviderAlias(modelName)
 }
 

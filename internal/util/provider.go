@@ -152,6 +152,76 @@ func InArray(hystack []string, needle string) bool {
 	return false
 }
 
+// IsCrossProviderAlias checks if the given model name is an alias
+// configured for cross-provider routing (codex-api-key with provider-type).
+//
+// Parameters:
+//   - modelName: The model name to check
+//   - cfg: The application configuration
+//
+// Returns:
+//   - bool: True if the model name is a cross-provider alias, false otherwise
+func IsCrossProviderAlias(modelName string, cfg *config.Config) bool {
+	if cfg == nil || modelName == "" {
+		return false
+	}
+
+	modelLower := strings.ToLower(strings.TrimSpace(modelName))
+
+	for _, ck := range cfg.CodexKey {
+		// Only check entries with provider-type set
+		providerType := strings.ToLower(strings.TrimSpace(ck.ProviderType))
+		if providerType == "" {
+			continue
+		}
+
+		for _, model := range ck.Models {
+			alias := strings.ToLower(strings.TrimSpace(model.Alias))
+			if alias != "" && alias == modelLower {
+				return true
+			}
+		}
+	}
+	return false
+}
+
+// GetCrossProviderConfig returns the cross-provider routing configuration
+// for the given model alias.
+//
+// Parameters:
+//   - alias: The model alias to find configuration for
+//   - cfg: The application configuration
+//
+// Returns:
+//   - *config.CodexKey: The matching codex key configuration, or nil if not found
+//   - *config.CodexModel: The matching model configuration, or nil if not found
+func GetCrossProviderConfig(alias string, cfg *config.Config) (*config.CodexKey, *config.CodexModel) {
+	if cfg == nil || alias == "" {
+		return nil, nil
+	}
+
+	aliasLower := strings.ToLower(strings.TrimSpace(alias))
+
+	for i := range cfg.CodexKey {
+		ck := &cfg.CodexKey[i]
+
+		// Only check entries with provider-type set
+		providerType := strings.ToLower(strings.TrimSpace(ck.ProviderType))
+		if providerType == "" {
+			continue
+		}
+
+		for j := range ck.Models {
+			model := &ck.Models[j]
+			modelAlias := strings.ToLower(strings.TrimSpace(model.Alias))
+			if modelAlias != "" && modelAlias == aliasLower {
+				return ck, model
+			}
+		}
+	}
+	return nil, nil
+}
+
 // HideAPIKey obscures an API key for logging purposes, showing only the first and last few characters.
 //
 // Parameters:

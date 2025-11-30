@@ -1,0 +1,76 @@
+# =============================================================================
+# CLIProxyAPI Configuration: Amp CLI + OpenAI GPT-5-Pro
+# =============================================================================
+# Mục đích: Dùng Amp CLI với OpenAI GPT-5-Pro làm backend
+# 
+# Yêu cầu:
+#   1. OpenAI API key từ https://platform.openai.com/api-keys
+#   2. Translator Proxy (claude-code-provider-proxy) chạy trên port 8318
+#   3. CLIProxyAPI chạy trên port 8317
+#
+# Cách dùng:
+#   1. Thay "sk-xxx" bằng OpenAI API key thật
+#   2. Chạy CLIProxyAPI: ./cli-proxy-api --config config.amp-gpt5pro.yaml
+#   3. Chạy Translator Proxy trên port 8318
+#   4. Cấu hình Amp: amp.url = http://localhost:8318
+# =============================================================================
+
+# Server port
+port: 8317
+
+# Authentication directory
+auth-dir: "~/.cli-proxy-api"
+
+# Amp integration - Management routes (login, threads)
+amp-upstream-url: "https://ampcode.com"
+amp-restrict-management-to-localhost: true
+
+# =============================================================================
+# OpenAI API - GPT-5-Pro
+# =============================================================================
+# API Key: https://platform.openai.com/api-keys
+# Models: gpt-5-pro, gpt-5, gpt-5-mini, gpt-5-nano
+# =============================================================================
+codex-api-key:
+  - api-key: "sk-xxx"  # ⚠️ THAY BẰNG OPENAI API KEY CỦA BẠN
+    base-url: "https://api.openai.com/v1"
+    models:
+      # GPT-5 Pro (flagship model)
+      - name: "gpt-5-pro"
+        alias: "gpt-5-pro"
+      # GPT-5 standard
+      - name: "gpt-5"
+        alias: "gpt-5"
+      # GPT-5 Mini (faster, cheaper)
+      - name: "gpt-5-mini"
+        alias: "gpt-5-mini"
+      # GPT-5 Nano (fastest, cheapest)
+      - name: "gpt-5-nano"
+        alias: "gpt-5-nano"
+      # GPT-4o variants (fallback)
+      - name: "gpt-4o"
+        alias: "gpt-4o"
+      - name: "gpt-4o-mini"
+        alias: "gpt-4o-mini"
+
+# =============================================================================
+# Optional Settings
+# =============================================================================
+
+# Debug mode - bật để xem log chi tiết
+debug: true
+
+# Ghi log ra file
+logging-to-file: true
+
+# Thống kê usage
+usage-statistics-enabled: true
+
+# Retry settings
+request-retry: 3
+max-retry-interval: 30
+
+# Quota exceeded behavior
+quota-exceeded:
+  switch-project: true
+  switch-preview-model: true

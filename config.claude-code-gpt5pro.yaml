@@ -1,0 +1,86 @@
+# =============================================================================
+# CLIProxyAPI Configuration: Claude Code + OpenAI GPT-5-Pro
+# =============================================================================
+# Mục đích: Dùng Claude Code CLI với OpenAI GPT-5-Pro làm backend
+# 
+# Cách dùng:
+#   1. Thay "sk-xxx" bằng OpenAI API key thật
+#   2. Chạy: ./cli-proxy-api --config config.claude-code-gpt5pro.yaml
+#   3. Set environment variables (xem bên dưới)
+#   4. Chạy: claude "Hello"
+# =============================================================================
+
+# Server port
+port: 8317
+
+# Authentication directory
+auth-dir: "~/.cli-proxy-api"
+
+
+# Debug mode
+debug: true
+
+# Ghi log ra file
+logging-to-file: true
+
+# Thống kê usage
+usage-statistics-enabled: true
+
+# Retry settings
+request-retry: 3
+max-retry-interval: 30
+
+
+# =============================================================================
+# OpenRouter API - Dùng openai-compatibility
+# =============================================================================
+# API Key: https://openrouter.ai/keys
+# OpenRouter hỗ trợ nhiều models từ nhiều providers
+# =============================================================================
+openai-compatibility:
+  - name: "openrouter"
+    base-url: "https://openrouter.ai/api/v1"
+    api-key-entries:
+      - api-key: "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"
+    models:
+      # =================================================================
+      # OpenAI GPT-5.1 Series (via OpenRouter)
+      # =================================================================
+      - name: "openai/gpt-5.1"
+        alias: "gpt-5.1"
+      - name: "openai/gpt-5.1"
+        alias: "gpt-5.1-codex"
+      - name: "openai/gpt-5.1"
+        alias: "gpt-5-high"
+      - name: "openai/gpt-5.1"
+        alias: "gpt-5-pro"
+      
+      # GPT-5 variants
+      - name: "openai/gpt-5"
+        alias: "gpt-5"
+      - name: "openai/gpt-5"
+        alias: "gpt-5-medium"
+      
+      # GPT-4o (faster/cheaper)
+      - name: "openai/gpt-4o"
+        alias: "gpt-4o"
+      - name: "openai/gpt-4o"
+        alias: "gpt-5-minimal"
+      
+      - name: "openai/gpt-4o-mini"
+        alias: "gpt-4o-mini"
+      - name: "openai/gpt-4o-mini"
+        alias: "gpt-5-low"
+      
+      # =================================================================
+      # Claude models (via OpenRouter) - Optional
+      # =================================================================
+      - name: "anthropic/claude-sonnet-4"
+        alias: "claude-sonnet-4"
+      - name: "anthropic/claude-3.5-haiku"
+        alias: "claude-haiku"
+
+
+# =============================================================================
+# Optional Settings
+# =============================================================================

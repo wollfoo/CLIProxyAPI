@@ -1,0 +1,111 @@
+# =============================================================================
+# CLIProxyAPI Configuration: Amp CLI + OpenAI API
+# =============================================================================
+# Mục đích: Dùng Amp CLI với OpenAI API làm backend
+# 
+# Cách dùng:
+#   1. Thay "sk-xxx" bằng OpenAI API key từ https://platform.openai.com/api-keys
+#   2. Chạy: ./cli-proxy-api --config config.amp-openai.yaml
+#   3. Cấu hình Amp CLI:
+#      - Edit ~/.config/amp/settings.json: { "amp.url": "http://localhost:8317" }
+#   4. Chạy: amp login && amp "Hello"
+# =============================================================================
+
+# Server port
+port: 8317
+
+# Authentication directory
+auth-dir: "~/.cli-proxy-api"
+
+# Amp integration - Required for management routes (login, threads, etc.)
+amp-upstream-url: "https://ampcode.com"
+amp-restrict-management-to-localhost: true
+
+# =============================================================================
+# OpenAI API as Backend
+# =============================================================================
+# OpenAI API key: https://platform.openai.com/api-keys
+# =============================================================================
+codex-api-key:
+  - api-key: "sk-xxx"  # ⚠️ THAY BẰNG OPENAI API KEY CỦA BẠN
+    base-url: "https://api.openai.com/v1"
+    models:
+      # GPT-4.1 / GPT-4o models
+      - name: "gpt-4.1"
+        alias: "gpt-4.1"
+      - name: "gpt-4o"
+        alias: "gpt-4o"
+      - name: "gpt-4o-mini"
+        alias: "gpt-4o-mini"
+      # o1/o3 reasoning models
+      - name: "o1"
+        alias: "o1"
+      - name: "o1-mini"
+        alias: "o1-mini"
+      - name: "o3-mini"
+        alias: "o3-mini"
+
+# =============================================================================
+# Claude API Backend (cho Amp CLI Smart/Rush mode)
+# =============================================================================
+# Amp CLI gọi Anthropic API format → Cần provider tương thích Anthropic
+# Option 1: Dùng OpenRouter (hỗ trợ Anthropic format + nhiều models)
+# Option 2: Dùng MegaLLM (https://ai.megallm.io)
+# Option 3: Dùng Anthropic API trực tiếp
+# =============================================================================
+claude-api-key:
+  # Option 1: OpenRouter - Tương thích Anthropic API
+  - api-key: "sk-or-v1-xxx"  # ⚠️ THAY BẰNG OPENROUTER API KEY
+    base-url: "https://openrouter.ai/api/v1"
+    models:
+      # Claude Opus → OpenAI GPT-4.1 via OpenRouter
+      - name: "openai/gpt-4.1"
+        alias: "claude-opus-4-5-20251101"
+      
+      # Claude Sonnet → OpenAI GPT-4o via OpenRouter
+      - name: "openai/gpt-4o"
+        alias: "claude-sonnet-4-5-20250929"
+      - name: "openai/gpt-4o"
+        alias: "claude-sonnet-4-5-20250514"
+      - name: "openai/gpt-4o"
+        alias: "claude-sonnet-4-5"
+      
+      # Claude Haiku → OpenAI GPT-4o-mini via OpenRouter
+      - name: "openai/gpt-4o-mini"
+        alias: "claude-haiku-4-5-20251001"
+      - name: "openai/gpt-4o-mini"
+        alias: "claude-haiku-4-5"
+      - name: "openai/gpt-4o-mini"
+        alias: "claude-3-5-haiku-20241022"
+
+  # Option 2: Anthropic API trực tiếp (nếu có API key)
+  # - api-key: "sk-ant-xxx"
+  #   base-url: "https://api.anthropic.com"
+  #   models:
+  #     - name: "claude-opus-4-5-20251101"
+  #       alias: "claude-opus-4-5-20251101"
+
+# =============================================================================
+# Optional Settings
+# =============================================================================
+
+# Debug mode
+debug: false
+
+# Ghi log ra file
+logging-to-file: true
+
+# Thống kê usage
+usage-statistics-enabled: true
+
+# Retry settings
+request-retry: 3
+max-retry-interval: 30
+
+# Quota exceeded behavior
+quota-exceeded:
+  switch-project: true
+  switch-preview-model: true
+
+# WebSocket authentication
+ws-auth: false

@@ -45,6 +45,9 @@ quota-exceeded:
   switch-project: true
   switch-preview-model: true
 
+# Optional: WebSocket Authentication
+ws-auth: false
+
 # [CRITICAL] Azure AI Foundry (Claude) Configuration
 # This section forces Amp CLI requests to use your Azure endpoint instead of fallback
 claude-api-key:
@@ -59,6 +62,15 @@ claude-api-key:
     
     # Model Mappings: Amp CLI Model Name -> Azure Foundry Model Name
     models:
+        # --- Opus Models ---
+      # Amp typically requests: claude-opus-4-5-20251101
+      - name: "claude-opus-4-5"
+        alias: "claude-opus-4-5-20251101"
+      - name: "claude-opus-4-5"
+        alias: "claude-opus-4-5"
+      - name: "claude-opus-4-1"
+        alias: "claude-opus-4-1"
+
       # --- Haiku Models ---
       # Amp typically requests: claude-haiku-4-5-20251001
       - name: "claude-haiku-4-5"          # Azure Model Name
@@ -73,14 +85,3 @@ claude-api-key:
       - name: "claude-sonnet-4-5"
         alias: "claude-sonnet-4-5"
       
-      # --- Opus Models ---
-      # Amp typically requests: claude-opus-4-5-20251101
-      - name: "claude-opus-4-5"
-        alias: "claude-opus-4-5-20251101"
-      - name: "claude-opus-4-5"
-        alias: "claude-opus-4-5"
-      - name: "claude-opus-4-1"
-        alias: "claude-opus-4-1"
-
-# Optional: WebSocket Authentication
-ws-auth: false
