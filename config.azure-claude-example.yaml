@@ -1,87 +1,210 @@
-# CLIProxyAPI Configuration for Azure AI Foundry (Claude) Integration
-# Usage:
-# 1. Rename this file to config.yaml
-# 2. Replace YOUR_AZURE_API_KEY and YOUR_RESOURCE_NAME with your actual values
-# 3. Run: ./cli-proxy-api --config config.yaml
+# ============================================================================
+# CLIProxyAPI Configuration: Oracle GPT-5 → Azure Claude Opus
+# ============================================================================
+# 
+# Mục đích: Redirect Amp CLI Oracle subagent từ GPT-5 sang Claude Opus 4.5
+# trên Azure AI Foundry sử dụng cross-provider routing.
+#
+# Luồng hoạt động:
+#   1. Amp CLI Oracle gọi GPT-5 (OpenAI format)
+#   2. CLIProxyAPI nhận request, detect cross-provider routing
+#   3. Request được translate từ OpenAI → Claude format
+#   4. Forward đến Azure AI Foundry Claude endpoint
+#   5. Response được translate Claude → OpenAI format
+#   6. Trả về Amp CLI Oracle như là GPT-5 response
+#
+# Yêu cầu:
+#   - Azure AI Foundry account với Claude model deployment
+#   - API key từ Azure AI Foundry
+#
+# ============================================================================
 
-# Server port
+# Server Configuration
 port: 8317
 
-# TLS settings (disabled for local proxy)
-tls:
-  enable: false
-  cert: ""
-  key: ""
-
-# Management API settings
-remote-management:
-  allow-remote: false
-  secret-key: "" # Leave empty to disable management API auth or generate a random key
-  disable-control-panel: false
-
-# Authentication directory
+# Authentication directory for OAuth tokens
 auth-dir: "~/.cli-proxy-api"
 
-# Enable debug logging (recommended for troubleshooting model names)
+# Enable debug logging for troubleshooting
 debug: true
 
-# Log to file (optional)
+# Log to file (tùy chọn)
 logging-to-file: false
 
-# Amp integration settings
+
+# Amp upstream URL
 amp-upstream-url: "https://ampcode.com"
-amp-upstream-api-key: ""
 amp-restrict-management-to-localhost: true
 
 # Usage statistics
 usage-statistics-enabled: false
 
+# Proxy URL (nếu cần proxy ra internet)
+# proxy-url: "socks5://user:pass@192.168.1.1:1080/"
+
 # Retry configuration
 request-retry: 3
 max-retry-interval: 30
 
-# Quota behavior
+# Quota behavior - tự động chuyển khi hết quota
 quota-exceeded:
   switch-project: true
   switch-preview-model: true
 
-# Optional: WebSocket Authentication
+# WebSocket Authentication
 ws-auth: false
 
-# [CRITICAL] Azure AI Foundry (Claude) Configuration
-# This section forces Amp CLI requests to use your Azure endpoint instead of fallback
-claude-api-key:
-  - api-key: "YOUR_AZURE_API_KEY"
-    # Format: https://<your-resource-name>.services.ai.azure.com/anthropic
-    base-url: "https://YOUR_RESOURCE_NAME.services.ai.azure.com/anthropic"
+# ============================================================================
+# CROSS-PROVIDER ROUTING: Oracle GPT-5 → Azure Claude
+# ============================================================================
+# Khi Amp CLI Oracle gọi GPT-5, request sẽ được:
+#   1. Translate từ OpenAI Chat Completions → Claude Messages format
+#   2. Route tới Azure AI Foundry Claude endpoint
+#   3. Response translate ngược lại Claude → OpenAI format
+#
+codex-api-key:
+  # Cross-provider routing configuration
+  - api-key: "your-azure-api-key-here"
+    base-url: "https://foundry-sonnet.services.ai.azure.com/anthropic"
     
-    # Azure Foundry requires specific headers
+    # QUAN TRỌNG: provider-type cho phép cross-provider routing
+    # Khi set "claude", requests OpenAI sẽ được translate sang Claude format
+    provider-type: "claude"
+    
+    # Custom headers cho Azure AI Foundry
     headers:
       anthropic-version: "2023-06-01"
-      x-api-key: "YOUR_AZURE_API_KEY" # Must match api-key above
+      x-api-key: "your-azure-api-key-here"
     
-    # Model Mappings: Amp CLI Model Name -> Azure Foundry Model Name
+    # Model mappings: Oracle model aliases → Azure Claude models
+    # Amp CLI Oracle sử dụng gpt-5 hoặc gpt-5.1
     models:
-        # --- Opus Models ---
-      # Amp typically requests: claude-opus-4-5-20251101
+      # Primary Oracle model mapping
+      - name: "claude-opus-4-5"
+        alias: "gpt-5"
+      
+      # GPT-5.1 → Claude Opus
+      - name: "claude-opus-4-5"
+        alias: "gpt-5.1"
+      
+      # Các variant khác của GPT-5
+      - name: "claude-opus-4-5"
+        alias: "gpt-5-minimal"
+      - name: "claude-opus-4-5"
+        alias: "gpt-5-low"
+      - name: "claude-opus-4-5"
+        alias: "gpt-5-medium"
+      - name: "claude-opus-4-5"
+        alias: "gpt-5-high"
+      
+      # GPT-5.1 variants
+      - name: "claude-opus-4-5"
+        alias: "gpt-5.1-none"
+      - name: "claude-opus-4-5"
+        alias: "gpt-5.1-low"
+      - name: "claude-opus-4-5"
+        alias: "gpt-5.1-medium"
+      - name: "claude-opus-4-5"
+        alias: "gpt-5.1-high"
+      
+      # Optional: Map GPT-5 Codex variants nếu cần
+      # - name: "claude-sonnet-4-5"
+      #   alias: "gpt-5-codex"
+      # - name: "claude-haiku-4-5"
+      #   alias: "gpt-5-codex-mini"
+
+# ============================================================================
+# AZURE CLAUDE DIRECT (cho main agent - không cần translate)
+# ============================================================================
+# Cấu hình này cho phép Amp CLI main agent sử dụng Claude trực tiếp
+# (không cần cross-provider routing vì đã là Claude format)
+#
+claude-api-key:
+  - api-key: "your-azure-api-key-here"
+    base-url: "https://foundry-sonnet.services.ai.azure.com/anthropic"
+    
+    # Azure-specific headers
+    headers:
+      anthropic-version: "2023-06-01"
+      x-api-key: "your-azure-api-key-here"
+    
+    # Model Mappings: TẤT CẢ Claude models → claude-opus-4-5
+    # Điều này đảm bảo mọi subagent đều dùng Opus 4.5
+    models:
+      # =====================================================
+      # OPUS MODELS (Smart mode - giữ nguyên)
+      # =====================================================
       - name: "claude-opus-4-5"
         alias: "claude-opus-4-5-20251101"
       - name: "claude-opus-4-5"
         alias: "claude-opus-4-5"
-      - name: "claude-opus-4-1"
+      - name: "claude-opus-4-5"
         alias: "claude-opus-4-1"
-
-      # --- Haiku Models ---
-      # Amp typically requests: claude-haiku-4-5-20251001
-      - name: "claude-haiku-4-5"          # Azure Model Name
-        alias: "claude-haiku-4-5-20251001" # Amp CLI Model Alias
-      - name: "claude-haiku-4-5"
-        alias: "claude-haiku-4-5"
-
-      # --- Sonnet Models ---
-      # Amp typically requests: claude-sonnet-4-5-20250929
-      - name: "claude-sonnet-4-5"
-        alias: "claude-sonnet-4-5-20250929"
-      - name: "claude-sonnet-4-5"
-        alias: "claude-sonnet-4-5"
       
+      # =====================================================
+      # SONNET → OPUS (Librarian subagent dùng Sonnet)
+      # =====================================================
+      - name: "claude-opus-4-5"
+        alias: "claude-sonnet-4-5-20250929"
+      - name: "claude-opus-4-5"
+        alias: "claude-sonnet-4-5"
+      - name: "claude-opus-4-5"
+        alias: "claude-sonnet-4"
+      
+      # =====================================================
+      # HAIKU 4.5 → OPUS (Search subagent dùng Haiku 4.5)
+      # =====================================================
+      - name: "claude-opus-4-5"
+        alias: "claude-haiku-4-5-20251001"
+      - name: "claude-opus-4-5"
+        alias: "claude-haiku-4-5"
+      
+      # =====================================================
+      # HAIKU 3.5 → OPUS (Titling system dùng Haiku 3.5)
+      # =====================================================
+      - name: "claude-opus-4-5"
+        alias: "claude-3-5-haiku-20241022"
+      - name: "claude-opus-4-5"
+        alias: "claude-3-5-haiku"
+      - name: "claude-opus-4-5"
+        alias: "claude-haiku-3-5"
+
+# ============================================================================
+# HƯỚNG DẪN SỬ DỤNG
+# ============================================================================
+#
+# 1. Thay thế YOUR_AZURE_API_KEY bằng API key từ Azure AI Foundry
+#
+# 2. Thay thế YOUR_RESOURCE_NAME bằng resource name của bạn
+#    Ví dụ: my-azure-claude.services.ai.azure.com/anthropic
+#
+# 3. Chạy CLIProxyAPI:
+#    ./cliproxyapi -config config.oracle-to-azure-claude.yaml
+#
+# 4. Configure Amp CLI để sử dụng proxy:
+#    export AMP_API_URL="http://localhost:8317"
+#    amp prompt "use oracle to analyze this code"
+#
+# 5. Kiểm tra logs:
+#    - Tìm "cross-provider executor" trong logs
+#    - Tìm "model alias gpt-5 → claude-opus-4-5"
+#
+# ============================================================================
+# TROUBLESHOOTING
+# ============================================================================
+#
+# 1. "cross-provider executor: missing base URL"
+#    → Kiểm tra base-url trong codex-api-key
+#
+# 2. "cross-provider executor: missing API key"
+#    → Kiểm tra api-key trong codex-api-key
+#
+# 3. Model không được nhận diện:
+#    → Kiểm tra models aliases trong codex-api-key
+#    → Đảm bảo model alias khớp với tên Oracle sử dụng (gpt-5, gpt-5.1)
+#
+# 4. Azure trả về lỗi authentication:
+#    → Kiểm tra x-api-key trong headers
+#    → Kiểm tra anthropic-version header
+#
+# ============================================================================
