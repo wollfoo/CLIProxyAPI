@@ -27,18 +27,7 @@ import (
 	"golang.org/x/oauth2/google"
 )
 
-const (
-	geminiOauthClientID     = "681255809395-oo8ft2oprdrnp9e3aqf6av3hmdib135j.apps.googleusercontent.com"
-	geminiOauthClientSecret = "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"
-)
 
-var (
-	geminiOauthScopes = []string{
-		"https://www.googleapis.com/auth/cloud-platform",
-		"https://www.googleapis.com/auth/userinfo.email",
-		"https://www.googleapis.com/auth/userinfo.profile",
-	}
-)
 
 // GeminiAuth provides methods for handling the Gemini OAuth2 authentication flow.
 // It encapsulates the logic for obtaining, storing, and refreshing authentication tokens
@@ -96,10 +85,10 @@ func (g *GeminiAuth) GetAuthenticatedClient(ctx context.Context, ts *GeminiToken
 
 	// Configure the OAuth2 client.
 	conf := &oauth2.Config{
-		ClientID:     geminiOauthClientID,
-		ClientSecret: geminiOauthClientSecret,
+		ClientID:     GetGeminiOAuthClientID(),
+		ClientSecret: GetGeminiOAuthClientSecret(),
 		RedirectURL:  "http://localhost:8085/oauth2callback", // This will be used by the local server.
-		Scopes:       geminiOauthScopes,
+		Scopes:       GeminiOAuthScopes,
 		Endpoint:     google.Endpoint,
 	}
 
@@ -182,9 +171,9 @@ func (g *GeminiAuth) createTokenStorage(ctx context.Context, config *oauth2.Conf
 	}
 
 	ifToken["token_uri"] = "https://oauth2.googleapis.com/token"
-	ifToken["client_id"] = geminiOauthClientID
-	ifToken["client_secret"] = geminiOauthClientSecret
-	ifToken["scopes"] = geminiOauthScopes
+	ifToken["client_id"] = GetGeminiOAuthClientID()
+	ifToken["client_secret"] = GetGeminiOAuthClientSecret()
+	ifToken["scopes"] = GeminiOAuthScopes
 	ifToken["universe_domain"] = "googleapis.com"
 
 	ts := GeminiTokenStorage{
