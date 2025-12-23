@@ -1,6 +1,7 @@
 # Binaries
 cli-proxy-api
 *.exe
+*.pid
 .windsurf/
 # Configuration
 config.yaml
