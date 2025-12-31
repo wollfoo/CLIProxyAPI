@@ -657,6 +657,13 @@ func decodeResponseBody(body io.ReadCloser, contentEncoding string) (io.ReadClos
 
 func applyClaudeHeaders(r *http.Request, auth *cliproxyauth.Auth, apiKey string, stream bool, extraBetas []string) {
 	r.Header.Set("Authorization", "Bearer "+apiKey)
+	
+	// [AZURE-FIX] Azure AI Foundry requires x-api-key header for authentication
+	// Standard Anthropic API uses Authorization: Bearer, but Azure mirrors require specific headers
+	if r.URL != nil && strings.Contains(r.URL.Host, "azure.com") {
+		r.Header.Set("x-api-key", apiKey)
+	}
+
 	r.Header.Set("Content-Type", "application/json")
 
 	var ginHeaders http.Header
