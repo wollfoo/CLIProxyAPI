@@ -103,21 +103,48 @@ func (e *ClaudeExecutor) Execute(ctx context.Context, auth *cliproxyauth.Auth, r
 	})
 
 	httpClient := newProxyAwareHTTPClient(ctx, e.cfg, auth, 0)
-	httpResp, err := httpClient.Do(httpReq)
-	if err != nil {
-		recordAPIResponseError(ctx, e.cfg, err)
-		return resp, err
-	}
-	recordAPIResponseMetadata(ctx, e.cfg, httpResp.StatusCode, httpResp.Header.Clone())
-	if httpResp.StatusCode < 200 || httpResp.StatusCode >= 300 {
+
+	// [AZURE-FIX] Retry logic for intermittent 500 errors from Azure AI Foundry
+	const maxRetries = 2
+	const retryDelay = 2 * time.Second
+	var httpResp *http.Response
+	var lastErr error
+
+	for attempt := 0; attempt <= maxRetries; attempt++ {
+		if attempt > 0 {
+			log.Debugf("claude executor: retry attempt %d/%d after %v", attempt, maxRetries, retryDelay)
+			time.Sleep(retryDelay)
+			// Recreate request for retry (body was consumed)
+			httpReq, err = http.NewRequestWithContext(ctx, http.MethodPost, url, bytes.NewReader(body))
+			if err != nil {
+				return resp, err
+			}
+			applyClaudeHeaders(httpReq, auth, apiKey, false, extraBetas)
+		}
+
+		httpResp, err = httpClient.Do(httpReq)
+		if err != nil {
+			recordAPIResponseError(ctx, e.cfg, err)
+			return resp, err
+		}
+		recordAPIResponseMetadata(ctx, e.cfg, httpResp.StatusCode, httpResp.Header.Clone())
+
+		if httpResp.StatusCode >= 200 && httpResp.StatusCode < 300 {
+			break // Success
+		}
+
 		b, _ := io.ReadAll(httpResp.Body)
 		appendAPIResponseChunk(ctx, e.cfg, b)
 		log.Debugf("request error, error status: %d, error body: %s", httpResp.StatusCode, summarizeErrorBody(httpResp.Header.Get("Content-Type"), b))
-		err = statusErr{code: httpResp.StatusCode, msg: string(b)}
+		lastErr = statusErr{code: httpResp.StatusCode, msg: string(b)}
 		if errClose := httpResp.Body.Close(); errClose != nil {
 			log.Errorf("response body close error: %v", errClose)
 		}
-		return resp, err
+
+		// Only retry on 500 errors (Azure backend auth failures)
+		if httpResp.StatusCode != 500 || attempt == maxRetries {
+			return resp, lastErr
+		}
 	}
 	decodedBody, err := decodeResponseBody(httpResp.Body, httpResp.Header.Get("Content-Encoding"))
 	if err != nil {
@@ -208,21 +235,48 @@ func (e *ClaudeExecutor) ExecuteStream(ctx context.Context, auth *cliproxyauth.A
 	})
 
 	httpClient := newProxyAwareHTTPClient(ctx, e.cfg, auth, 0)
-	httpResp, err := httpClient.Do(httpReq)
-	if err != nil {
-		recordAPIResponseError(ctx, e.cfg, err)
-		return nil, err
-	}
-	recordAPIResponseMetadata(ctx, e.cfg, httpResp.StatusCode, httpResp.Header.Clone())
-	if httpResp.StatusCode < 200 || httpResp.StatusCode >= 300 {
+
+	// [AZURE-FIX] Retry logic for intermittent 500 errors from Azure AI Foundry
+	const maxRetries = 2
+	const retryDelay = 2 * time.Second
+	var httpResp *http.Response
+	var lastErr error
+
+	for attempt := 0; attempt <= maxRetries; attempt++ {
+		if attempt > 0 {
+			log.Debugf("claude executor: retry attempt %d/%d after %v", attempt, maxRetries, retryDelay)
+			time.Sleep(retryDelay)
+			// Recreate request for retry (body was consumed)
+			httpReq, err = http.NewRequestWithContext(ctx, http.MethodPost, url, bytes.NewReader(body))
+			if err != nil {
+				return nil, err
+			}
+			applyClaudeHeaders(httpReq, auth, apiKey, true, extraBetas)
+		}
+
+		httpResp, err = httpClient.Do(httpReq)
+		if err != nil {
+			recordAPIResponseError(ctx, e.cfg, err)
+			return nil, err
+		}
+		recordAPIResponseMetadata(ctx, e.cfg, httpResp.StatusCode, httpResp.Header.Clone())
+
+		if httpResp.StatusCode >= 200 && httpResp.StatusCode < 300 {
+			break // Success
+		}
+
 		b, _ := io.ReadAll(httpResp.Body)
 		appendAPIResponseChunk(ctx, e.cfg, b)
 		log.Debugf("request error, error status: %d, error body: %s", httpResp.StatusCode, summarizeErrorBody(httpResp.Header.Get("Content-Type"), b))
 		if errClose := httpResp.Body.Close(); errClose != nil {
 			log.Errorf("response body close error: %v", errClose)
 		}
-		err = statusErr{code: httpResp.StatusCode, msg: string(b)}
-		return nil, err
+		lastErr = statusErr{code: httpResp.StatusCode, msg: string(b)}
+
+		// Only retry on 500 errors (Azure backend auth failures)
+		if httpResp.StatusCode != 500 || attempt == maxRetries {
+			return nil, lastErr
+		}
 	}
 	decodedBody, err := decodeResponseBody(httpResp.Body, httpResp.Header.Get("Content-Encoding"))
 	if err != nil {
@@ -657,13 +711,13 @@ func decodeResponseBody(body io.ReadCloser, contentEncoding string) (io.ReadClos
 
 func applyClaudeHeaders(r *http.Request, auth *cliproxyauth.Auth, apiKey string, stream bool, extraBetas []string) {
 	isAzure := r.URL != nil && strings.Contains(r.URL.Host, "azure.com")
+	log.Debugf("claude executor: applyClaudeHeaders host=%s isAzure=%t", r.URL.Host, isAzure)
 
 	if !isAzure {
 		r.Header.Set("Authorization", "Bearer "+apiKey)
 	} else {
-		// [AZURE-FIX] Azure AI Foundry requires api-key header.
-		// Sending Authorization: Bearer with an API key causes 500 errors on some endpoints.
-		r.Header.Set("x-api-key", apiKey)
+		// [AZURE-FIX] Azure AI Foundry requires ONLY the "api-key" header.
+		// Do NOT set Authorization or x-api-key, as they may conflict with Azure's auth flow.
 		r.Header.Set("api-key", apiKey)
 	}
 
