@@ -228,6 +228,38 @@ install_nodejs() {
 }
 
 # =============================================================================
+# CÀI ĐẶT GO (GOLANG)
+# =============================================================================
+install_go() {
+    log_info "Kiểm tra **Go (Golang)**..."
+    
+    if is_installed go; then
+        local current_version
+        current_version=$(go version | awk '{print $3}' 2>/dev/null || echo "unknown")
+        log_success "Go đã có (version: $current_version)"
+        return 0
+    fi
+    
+    log_info "Đang cài đặt **Go** (via Snap)..."
+    
+    # Go cần snap để cài version mới nhất
+    if ! is_installed snap; then
+        log_info "  - Đang cài đặt Snapd..."
+        apt-get install -y -qq snapd
+    fi
+    
+    # Cài đặt Go classic
+    snap install go --classic
+    
+    if is_installed go; then
+        log_success "Go đã cài đặt thành công ($(go version))"
+    else
+        log_error "Cài đặt Go thất bại"
+        return 1
+    fi
+}
+
+# =============================================================================
 # CÀI ĐẶT POWERSHELL
 # =============================================================================
 install_powershell() {
@@ -279,7 +311,7 @@ verify_installations() {
     echo "=============================================="
     echo ""
     
-    local tools=("az:Azure CLI" "terraform:Terraform" "ansible:Ansible" "pwsh:PowerShell" "node:Node.js")
+    local tools=("az:Azure CLI" "terraform:Terraform" "ansible:Ansible" "pwsh:PowerShell" "node:Node.js" "go:Go")
     local all_ok=true
     
     for tool_entry in "${tools[@]}"; do
@@ -331,6 +363,7 @@ OPTIONS:
     --ansible           Chỉ cài đặt Ansible
     --powershell        Chỉ cài đặt PowerShell
     --nodejs            Chỉ cài đặt Node.js
+    --go                Chỉ cài đặt Go (Golang)
     --skip-cleanup      Bỏ qua bước dọn dẹp cache
     --verify            Chỉ kiểm tra các công cụ đã cài
 
@@ -352,6 +385,7 @@ main() {
     local install_ans=false
     local install_ps=false
     local install_node=false
+    local install_go=false
     local skip_cleanup=false
     local verify_only=false
     
@@ -389,6 +423,11 @@ main() {
             --nodejs)
                 install_all=false
                 install_node=true
+                shift
+                ;;
+            --go)
+                install_all=false
+                install_go=true
                 shift
                 ;;
             --skip-cleanup)
@@ -437,12 +476,14 @@ main() {
         install_ansible
         install_powershell
         install_nodejs
+        install_go
     else
         $install_azure && install_azure_cli
         $install_tf && install_terraform
         $install_ans && install_ansible
         $install_ps && install_powershell
         $install_node && install_nodejs
+        $install_go && install_go
     fi
     
     # Cleanup
