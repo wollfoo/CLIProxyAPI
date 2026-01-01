@@ -36,6 +36,7 @@ cd CLIProxyAPI
 ```bash
 go build -o cli-proxy-api ./cmd/server
 
+
 ```
 
 Sau khi build thành công, bạn sẽ có file thực thi `cli-proxy-api` trong thư mục hiện tại.
